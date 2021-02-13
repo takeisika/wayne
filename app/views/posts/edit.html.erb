@@ -1,0 +1,5 @@
+<p>編集してみよう!</p>
+<%=form_tag("/posts/#{@task.id}/update")do%>
+<textarea name="update"><%=@task.content%></textarea>
+<input type="submit" value="編集完了">
+<%end%>
