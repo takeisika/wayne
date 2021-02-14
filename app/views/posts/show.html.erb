@@ -1,3 +1,8 @@
-<%=@task.content%>
+<div class="showcontent">
+<p>タスク:<%=@task.content%></p>
+</div>
+<div class="showstatus">
+<p>ステータス:<%=@task.status%></p>
+</div>
 <%=link_to("編集","/posts/#{@task.id}/edit")%>
 <%=link_to("削除","/posts/#{@task.id}/destroy",{method: "post"})%>

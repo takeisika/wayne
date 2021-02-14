@@ -1,7 +1,11 @@
-<h1>単語一覧</h1>
+<h1>一覧</h1>
 <% @tasks.each do |task| %>
+    <p>---------------------------</p>
     <div class="postsindex">
-    <%=link_to(task.content,"/posts/#{task.id}")%>
+    <p>タスク:<%=link_to(task.content,"/posts/#{task.id}")%></p>
+    </div>
+    <div class="postsstatus">
+    <p>ステータス:<%=link_to(task.status,"/posts/#{task.id}")%></p>
     </div>
     <%end%>
 
