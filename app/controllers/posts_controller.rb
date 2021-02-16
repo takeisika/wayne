@@ -4,9 +4,9 @@ class PostsController < ApplicationController
   end
 
   def create
-    @task=Task.new(content: params[:task], status: params[:status])
+    @task=Task.new(content: params[:task], status: params[:status],user_id:@current_user.id)
     if @task.save
-    redirect_to("/posts/index")
+      redirect_to("/posts/index")
     else
       @error_messages="タスクは255文字以内、ステータスは10文字以内で記入してください。"
       render("posts/_form")

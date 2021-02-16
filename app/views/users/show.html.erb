@@ -1,0 +1,31 @@
+<div class="user">
+<div class="userue">
+<img src="<%= "/user_images/#{@user.image_name}" %>">
+<h2><%=@user.name%></h2>
+</div>
+<%if @current_user.id==@user.id%>
+<p><%=link_to("プロフィールを編集","/users/#{@user.id}/edit")%></p>
+<%end%>
+</div>
+<div class="toukouitiran">
+<p class="toukou"><%=link_to("投稿一覧","/users/#{@user.id}")%></p>
+<p><%=link_to("いいねした投稿一覧","/users/#{@user.id}/likes")%></p>
+</div>
+<%@tasks=Task.where(user_id: @user.id)%>
+<%if @tasks.count >= 1%>
+
+<div class="userindex">
+<% @tasks.each do |task| %>
+    <div class="usershow">
+    <img src="<%= "/user_images/#{@user.image_name}" %>">
+    <h2><%=link_to(@user.name,"/users/#{@user.id}")%></h2>
+    <h3><%=link_to(task.status,"/posts/#{task.id}")%></h3>
+    <p>説明:<%=link_to(task.content,"/posts/#{task.id}")%></p>
+    </div>
+    <%end%>
+    </div>
+
+    <%else%>
+    <p>投稿はまだありません!</p>
+    <%end%>
+    

@@ -1,0 +1,8 @@
+<p>ユーザー編集</p>
+<%=form_tag("/users/#{@user.id}/update",{multipart:true})do%>
+<p>ユーザー名</p>
+<input name="username" value="<%=@user.name%>">
+<p>画像</p>
+<input name="image" type="file">
+<input type="submit" value="編集完了">
+<%end%>

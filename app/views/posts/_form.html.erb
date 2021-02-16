@@ -1,13 +1,12 @@
-<p>タスク&ステータス作成</p>
 <%=@error_messages%>
 <%=form_tag("/posts/create")do%>
 <div class="taskver">
-<p>タスク</p>
-<textarea name="task"></textarea>
-</div>
-<div class="statusver">
-<p>ステータス</p>
+<p>フレーズ入力：</p>
 <input type="text" name="status">
 </div>
-<input type="submit" value="新規作成">
+<div class="statusver">
+<p>説明入力：</p>
+<textarea name="task"></textarea>
+</div>
+<input type="submit" value="投稿">
 <%end%>

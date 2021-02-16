@@ -1,11 +1,26 @@
-<h1>一覧</h1>
+<h1 class="minna">みんなの投稿一覧</h1>
+<div class="container">
 <% @tasks.each do |task| %>
-    <p>---------------------------</p>
-    <div class="postsindex">
-    <p>タスク:<%=link_to(task.content,"/posts/#{task.id}")%></p>
-    </div>
-    <div class="postsstatus">
-    <p>ステータス:<%=link_to(task.status,"/posts/#{task.id}")%></p>
+    <div class="index">
+    <%@user=User.find_by(id:task.user_id)%>
+    <%if @user%>
+    <div class="indexgazo"">
+    <img src="<%= "/user_images/#{@user.image_name}" %>">
+    <h3><%=link_to(@user.name,"/users/#{@user.id}")%></h3>
     </div>
     <%end%>
+    <div class="postsindex">
+    <h2><%=link_to(task.status,"/posts/#{task.id}")%></h2>
+    </div>
+    <div class="postsstatus">
+    <p>説明:<%=link_to(task.content,"/posts/#{task.id}")%></p>
+    </div>
+
+    <p>いいね数:<%=Like.where(post_id:task.id).count%></p>
+
+
+    <%=task.created_at%>
+    </div>
+    <%end%>
+    </div>
 
