@@ -1,3 +1,9 @@
+<% @user.errors.full_messages.each do |message| %>
+    <div class="form-error">
+      <%= message %>
+    </div>
+  <% end %>
+  
 <p>ユーザー編集</p>
 <%=form_tag("/users/#{@user.id}/update",{multipart:true})do%>
 <p>ユーザー名</p>

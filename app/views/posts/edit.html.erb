@@ -1,5 +1,9 @@
+<% @task.errors.full_messages.each do |message| %>
+    <div class="edit-error">
+      <%= message %>
+    </div>
+  <% end %>
 <p>編集してみよう!</p>
-<%=@error_messages%>
 <%=form_tag("/posts/#{@task.id}/update")do%>
 <textarea name="updatestatus"><%=@task.status%></textarea>
 <textarea name="update"><%=@task.content%></textarea>

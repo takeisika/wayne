@@ -4,6 +4,11 @@ class UsersController < ApplicationController
     @users=User.all
   end
 
+  def new
+    @user=User.new
+  end
+
+
   def show
     @user=User.find_by(id: params[:id])
     @tasks=Task.where(user_id: params[:id])
@@ -11,9 +16,12 @@ class UsersController < ApplicationController
 
   def create
     @user=User.new(name: params[:username],password: params[:password],image_name: "default.jpg")
-    @user.save
+    if @user.save
     session[:user_id]= @user.id
     redirect_to("/users/#{@user.id}")
+    else
+      render("users/new")
+    end
   end
 
 
@@ -24,15 +32,20 @@ class UsersController < ApplicationController
   def update
     @user=User.find_by(id:params[:id])
     @user.name=params[:username]
+
+    if params[:image]
     @user.image_name="#{@user.id}.jpg"
     image=params[:image]
-    if @user.save
     File.binwrite("public/user_images/#{@user.image_name}",image.read)
+    end
+    
+    if @user.save
     flash[:notice]="編集しました"
     redirect_to("/users/#{@user.id}")
+    else
+      render("users/edit")
     end
   end
-
 
   def login_form
   end
@@ -44,6 +57,9 @@ class UsersController < ApplicationController
       redirect_to("/")
       flash[:notice]="ログインしました。"
     else
+      @error_message="ユーザー名またはパスワードが間違っています"
+      @username=params[:username]
+      @password=params[:password]
       render("users/login_form")
     end
   end

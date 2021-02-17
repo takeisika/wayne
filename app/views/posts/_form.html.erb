@@ -1,4 +1,10 @@
-<%=@error_messages%>
+
+<% @task.errors.full_messages.each do |message| %>
+    <div class="form-error">
+      <%= message %>
+    </div>
+  <% end %>
+
 <%=form_tag("/posts/create")do%>
 <div class="taskver">
 <p>フレーズ入力：</p>

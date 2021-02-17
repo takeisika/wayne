@@ -3,12 +3,15 @@ class PostsController < ApplicationController
     @tasks=Task.all
   end
 
+  def _form
+    @task=Task.new
+  end
+
   def create
     @task=Task.new(content: params[:task], status: params[:status],user_id:@current_user.id)
     if @task.save
       redirect_to("/posts/index")
     else
-      @error_messages="タスクは255文字以内、ステータスは10文字以内で記入してください。"
       render("posts/_form")
     end
   end
@@ -29,7 +32,6 @@ class PostsController < ApplicationController
     flash[:notice]="編集完了"
     redirect_to("/posts/index")
     else
-      @error_messages="!タスクは255文字以内、ステータスは10文字以内で記入してください。"
       render("posts/edit")
     end
   end
@@ -41,6 +43,4 @@ class PostsController < ApplicationController
     redirect_to("/posts/index")
   end
 
-  def _form
-  end
 end
