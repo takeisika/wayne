@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_action:ensure,{only:[:new,:create,:login_form,:login]}
+  before_action:ensuring,{only:[:index,:show,:update,:edit]}
+  before_action:ensured,{only:[:edit,:update]}
 
   def index
     @users=User.all

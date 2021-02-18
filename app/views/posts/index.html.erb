@@ -10,16 +10,28 @@
     </div>
     <%end%>
     <div class="postsindex">
-    <h2><%=link_to(task.status,"/posts/#{task.id}")%></h2>
+    <h2><%=link_to(task.phrase,"/posts/#{task.id}")%></h2>
     </div>
     <div class="postsstatus">
     <p>説明:<%=link_to(task.content,"/posts/#{task.id}")%></p>
     </div>
 
     <p>いいね数:<%=Like.where(post_id:task.id).count%></p>
+    
+    <% if Like.find_by(user_id: @current_user.id, post_id: task.id) %>
+        <%= link_to("/likes/#{task.id}/destroy", {method: "post"}) do %>
+          <span class="fa fa-heart like-btn-unlike">いいねを取り消す</span>
+        <% end %>
+      <% else %>
+        <%= link_to("/likes/#{task.id}/create", {method: "post"}) do %>
+          <span class="fa fa-heart like-btn">いいね!</span>
+        <% end %>
+      <% end %>
 
 
-    <%=task.created_at%>
+    <p>投稿日時：<%= task.created_at.to_s(:datetime_jp) %></p>
+    <p>最終更新日時：<%= task.updated_at.to_s(:datetime_jp) %></p>
+    
     </div>
     <%end%>
     </div>

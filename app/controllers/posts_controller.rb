@@ -1,4 +1,7 @@
 class PostsController < ApplicationController
+  before_action:ensuring
+  before_action:postensure,{only:[:edit,:update,:destroy]}
+
   def index
     @tasks=Task.all
   end
@@ -8,7 +11,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @task=Task.new(content: params[:task], status: params[:status],user_id:@current_user.id)
+    @task=Task.new(content: params[:task], phrase: params[:phrase],user_id:@current_user.id)
     if @task.save
       redirect_to("/posts/index")
     else
@@ -27,7 +30,7 @@ class PostsController < ApplicationController
   def update
     @task=Task.find_by(id: params[:id])
     @task.content=params[:update]
-    @task.status=params[:updatestatus]
+    @task.phrase=params[:updatestatus]
     if @task.save
     flash[:notice]="編集完了"
     redirect_to("/posts/index")
@@ -43,4 +46,11 @@ class PostsController < ApplicationController
     redirect_to("/posts/index")
   end
 
+  def postensure
+    @task=Task.find_by(id:params[:id])
+    if @task.user_id!=@current_user.id
+      flash[:notice]="権限がありません"
+      redirect_to("/posts/index")
+    end
+  end
 end
