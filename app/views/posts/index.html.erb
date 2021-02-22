@@ -3,9 +3,16 @@
 <% @tasks.each do |task| %>
     <div class="index">
     <%@user=User.find_by(id:task.user_id)%>
+
     <%if @user%>
     <div class="indexgazo"">
-    <img src="<%= "/user_images/#{@user.image_name}" %>">
+
+    <%if @user.avator.attached?%>
+    <%=image_tag @user.avator%>
+    <%else%>
+    <%=image_tag "/user_images/default.jpg"%>
+    <%end%>
+
     <h3><%=link_to(@user.name,"/users/#{@user.id}")%></h3>
     </div>
     <%end%>
