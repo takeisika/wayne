@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user=User.new(name: params[:username],password: params[:password],image_name: "default.jpg")
+    @user=User.new(name: params[:username],password: params[:password])
     if @user.save
     session[:user_id]= @user.id
     redirect_to("/users/#{@user.id}")
@@ -34,15 +34,8 @@ class UsersController < ApplicationController
 
   def update
     @user=User.find_by(id:params[:id])
-    @user.name=params[:username]
-
-    if params[:image]
-    @user.image_name="#{@user.id}.jpg"
-    image=params[:image]
-    File.binwrite("public/user_images/#{@user.image_name}",image.read)
-    end
     
-    if @user.save
+    if @user.update(user_params)
     flash[:notice]="編集しました"
     redirect_to("/users/#{@user.id}")
     else
@@ -69,6 +62,13 @@ class UsersController < ApplicationController
 
   def logout
     session[:user_id]=nil
-    render("users/login_form")
+    redirect_to("/users/login_form")
   end
+
+  private
+  def user_params
+    params[:user].permit(:name,:avator)
+  end
+
+  
 end

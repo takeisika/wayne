@@ -5,11 +5,11 @@
   <% end %>
   
 <p>ユーザー編集</p>
-<%=form_tag("/users/#{@user.id}/update",{multipart:true})do%>
+<%= form_with model:@user,local:true do |form| %>
 <p>ユーザー名</p>
-<input name="username" value="<%=@user.name%>">
+<%= form.text_field :name %>
 <p>画像</p>
-<input name="image" type="file">
-<input type="submit" value="編集完了">
+<%= form.file_field :avator %>
+<%= form.submit %>
 <%end%>
 

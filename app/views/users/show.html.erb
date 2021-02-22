@@ -1,6 +1,10 @@
 <div class="user">
 <div class="userue">
-<img src="<%= "/user_images/#{@user.image_name}" %>">
+<%if @user.avator.attached?%>
+    <%=image_tag @user.avator%>
+    <%else%>
+    <%=image_tag "/user_images/default.jpg"%>
+    <%end%>
 <h2><%=@user.name%></h2>
 </div>
 <%if @current_user.id==@user.id%>
@@ -17,7 +21,11 @@
 <div class="userindex">
 <% @tasks.each do |task| %>
     <div class="usershow">
-    <img src="<%= "/user_images/#{@user.image_name}" %>">
+    <%if @user.avator.attached?%>
+    <%=image_tag @user.avator%>
+    <%else%>
+    <%=image_tag "/user_images/default.jpg"%>
+    <%end%>
     <h2><%=link_to(@user.name,"/users/#{@user.id}")%></h2>
     <h3><%=link_to(task.phrase,"/posts/#{task.id}")%></h3>
     <p>説明:<%=link_to(task.content,"/posts/#{task.id}")%></p>

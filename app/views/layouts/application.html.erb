@@ -13,7 +13,7 @@
   <body>
 
   <div class="new">
-   <%if session[:user_id]%>
+   <%if @current_user%>
    <%=link_to("トップページ","/home/top")%>
    <%=link_to("みんなの投稿一覧をみる","/posts/index")%>
    <%=link_to("投稿する","/posts/_form")%>
