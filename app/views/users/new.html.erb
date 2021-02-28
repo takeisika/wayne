@@ -8,8 +8,8 @@
 <p>ユーザー新規登録</p>
 <%=form_tag("/users/create")do%>
 <p>ユーザー名</p>
-<input name="username">
+<input name="username" value="<%= @user.name %>">
 <p>パスワード</p>
-<input type="password" name="password">
+<input type="password" name="password" value="<%= @user.password %>">
 <input type="submit" value="新規作成" class="usernewbutton">
 <%end%>
