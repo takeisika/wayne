@@ -8,6 +8,8 @@
 <%=form_tag("/users/login")do%>
 <p>ユーザー名</p>
 <input name="username" value="<%= @username %>">
+<p>email</p>
+<input name="email" value="<%= @email %>">
 <p>パスワード</p>
 <input type="password" name="password" value="<%= @password %>">
 <input type="submit" value="ログイン">

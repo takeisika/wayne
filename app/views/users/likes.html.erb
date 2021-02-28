@@ -29,7 +29,11 @@
     <%if @task%>
     <%@user=User.find_by(id:@task.user_id)%>
     <div class="iinegazo">
-    <img src="<%= "/user_images/#{@user.image_name}" %>">
+    <%if @user.avator.attached?%>
+    <%=image_tag @user.avator%>
+    <%else%>
+    <%=image_tag "/user_images/default.jpg"%>
+    <%end%>
     <h2><%=link_to(@user.name,"/users/#{@user.id}")%></h2>
     </div>
     <div class="iinecontent">

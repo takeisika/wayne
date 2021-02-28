@@ -18,10 +18,12 @@
    <%=link_to("みんなの投稿一覧をみる","/posts/index")%>
    <%=link_to("投稿する","/posts/_form")%>
    <%=link_to("ログアウト","/logout",{method: :post})%>
+   <%=link_to("このアプリについて","/home/about")%>
    <p><%=link_to(@current_user.name,"/users/#{@current_user.id}")%>さんがログイン中</p>
    <%else%>
    <%=link_to("新規ユーザー登録はこちらから","/users/new")%>
    <%=link_to("ログインはこちらから","/users/login_form")%>
+   <%=link_to("このアプリについて","/home/about")%>
    <%end%>
    </div>
    <%if flash[:notice]%>

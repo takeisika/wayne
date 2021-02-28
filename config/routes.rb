@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   
   get 'likes/create'
 
+  get "home/about"=>"home#about"
+
 
   get 'users/index'=>"users#index"
   get "users/new"=>"users#new"
