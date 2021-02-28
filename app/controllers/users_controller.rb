@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user=User.new(name: params[:username],email: params[:email],password: params[:password])
+    @user=User.new(name: params[:username],password: params[:password])
     if @user.save
     session[:user_id]= @user.id
     redirect_to("/users/#{@user.id}")
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
   end
 
   def login
-    @user=User.find_by(name: params[:username],email: params[:email],password: params[:password])
+    @user=User.find_by(name: params[:username],password: params[:password])
     if @user
       session[:user_id] =@user.id
       redirect_to("/")
