@@ -55,7 +55,6 @@ class UsersController < ApplicationController
     else
       @error_message="ユーザー名またはパスワードが間違っています"
       @username=params[:username]
-      @email=params[:email]
       @password=params[:password]
       render("users/login_form")
     end
