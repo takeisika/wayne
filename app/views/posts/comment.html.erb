@@ -1,0 +1,7 @@
+<h2>コメントしよう</h2>
+
+<%=form_tag("/posts/#{@task.id}/come")do%>
+<p>コメント入力：</p>
+<input type="text" name="content">
+<input type="submit" value="コメントする">
+<%end%>

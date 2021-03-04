@@ -51,3 +51,27 @@ a{
   opacity:0.7;
   margin:0;
 }
+
+
+table {
+  border-collapse: collapse;
+  text-align:center;
+  width:70%;
+  margin: 0 auto;
+}
+table th, table td {
+  border: solid 1px black;
+  /*実線 1px 黒*/
+}
+
+.ran{
+  text-align:center;
+}
+
+.hyou{
+  width:50px;
+}
+
+.come a{
+  color:blue;
+}

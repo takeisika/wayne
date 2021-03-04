@@ -26,6 +26,15 @@ Rails.application.routes.draw do
   post "posts/:id/update"=>"posts#update"
   post "posts/:id/destroy"=>"posts#destroy"
   get "posts/:id"=>"posts#show"
+  get "posts/:id/comment"=>"posts#comment"
+  post "posts/:id/come"=>"posts#come"
+  
+
+
+
+  get "comments/:id/edit"=>"comments#edit"
+  post "comments/:id/update"=>"comments#update"
+  post "comments/:id/destroy"=>"comments#destroy"
   
   
 

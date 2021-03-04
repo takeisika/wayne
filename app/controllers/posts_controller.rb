@@ -53,4 +53,15 @@ class PostsController < ApplicationController
       redirect_to("/posts/index")
     end
   end
+
+  def comment
+    @task=Task.find_by(id: params[:id])
+  end
+
+  def come
+    @comment=Comment.new(comment_id: params[:id],content: params[:content],user_id:@current_user.id)
+    if @comment.save
+      redirect_to("/posts/index")
+    end
+  end
 end

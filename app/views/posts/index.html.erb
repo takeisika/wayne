@@ -39,7 +39,51 @@
     <p>投稿日時：<%= task.created_at.to_s(:datetime_jp) %></p>
     <p>最終更新日時：<%= task.updated_at.to_s(:datetime_jp) %></p>
     
-    </div>
-    <%end%>
+    <div class="come">
+    <%= link_to("コメントする","/posts/#{task.id}/comment") %>
     </div>
 
+    <% @comments=Comment.where(comment_id: task.id)%>
+    <%if @comments%>
+
+    <%@comments.each do |comment|%>
+      <% @user=User.find_by(id: comment.user_id) %>
+      <p><%=link_to(@user.name,"/users/#{@user.id}")%>のコメント：</p>
+    <%if @current_user.id==comment.user_id%>
+    <p>
+    <%=link_to(comment.content,"/comments/#{comment.id}/edit") %>
+    </p>
+    <%else%>
+    <%=comment.content%>
+    <%end%>
+    <%end%>
+
+    <%end%>
+
+
+
+
+    </div>
+    <%end%>
+
+
+    
+    </div>
+
+    <div class="ran">
+    <h3>人気の投稿ランキング</h3>
+    </div>
+    <table>
+    <tr>
+    <th class="hyou">順位</th><th>フレーズ</th><th class="hyou">いいね数</th>
+    </tr>
+    <%@ranks=Like.group(:post_id).order('count_post_id DESC').limit(5).count(:post_id)%>
+    <%@ranks.each_with_index do |rank,i|%>
+      <% @tasuku=Task.find_by(id: rank.first) %>
+      <%if @tasuku%>
+      <tr>
+      <td><%= i + 1 %>位</td><td><%=@tasuku.phrase%></td><td><%=rank.second%></td>
+      </tr>
+      <%end%>
+    <%end%>
+    </table>
