@@ -79,7 +79,7 @@
     </tr>
 
 
-    <%@ranks=Like.group(:post_id).order('count_post_id DESC').limit(10).count(:post_id)%>
+    <%@ranks=Like.group(:post_id).order('count_post_id DESC').limit(5).count(:post_id)%>
 
    <%@ranks.each.with_index do |rank,i|%>
 
