@@ -14,7 +14,7 @@ before_action:set_current_user
     def ensuring
         if @current_user==nil
             flash[:notice]="ログインが必要です"
-            redirect_to("/users/login_form")
+            redirect_to("/posts/index")
         end
     end
 
