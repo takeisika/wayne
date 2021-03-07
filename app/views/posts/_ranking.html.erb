@@ -1,0 +1,68 @@
+<div class="ran">
+    <h3>人気の投稿ランキング</h3>
+    </div>
+    <table>
+    <tr>
+    <th class="hyou">順位</th><th>フレーズ</th><th class="hyou">いいね数</th>
+    </tr>
+
+
+
+    
+<%@ranks=Like.group(:post_id).order('count_post_id DESC').limit(5).count(:post_id)%>
+
+   <%@ranks.each.with_index do |rank,i|%>
+
+
+    <% @tasuku=Task.find_by(id: rank.first) %>
+     <%if @tasuku%>
+
+      
+
+
+
+    <tr>
+
+
+
+      <%if @suuji%>
+
+
+      
+       <% if @suuji != rank.second %>
+        <td><%= @j=i+1  %>位</td>
+        <%else%>
+        <td><%= @j %>位</td>
+        <%end%>
+        
+        <td><%=@tasuku.phrase%></td>
+        <td><%=rank.second%></td>
+
+
+
+
+      <%else%>
+        <td><%= i + 1 %>位</td>
+        <td><%=@tasuku.phrase%></td>
+        <td><%=rank.second%></td>
+      <%end%>
+       
+
+
+
+
+    </tr>
+
+
+    <% @suuji=Like.where(post_id: rank.first).count %>
+    
+
+
+     <%end%>
+
+     
+      
+
+
+   <%end%>
+    </table>

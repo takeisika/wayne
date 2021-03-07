@@ -23,17 +23,11 @@
     <p>説明:<%=link_to(task.content,"/posts/#{task.id}")%></p>
     </div>
 
-    <p>いいね数:<%=Like.where(post_id:task.id).count%></p>
     
-    <% if Like.find_by(user_id: @current_user.id, post_id: task.id) %>
-        <%= link_to("/likes/#{task.id}/destroy", {method: "post"}) do %>
-          <span class="fa fa-heart like-btn-unlike">いいねを取り消す</span>
-        <% end %>
-      <% else %>
-        <%= link_to("/likes/#{task.id}/create", {method: "post"}) do %>
-          <span class="fa fa-heart like-btn">いいね!</span>
-        <% end %>
-      <% end %>
+    
+    <div id="likes_buttons_<%= task.id %>">
+    <%= render partial: 'like', locals: { task: task} %>
+    </div>
 
 
     <p>投稿日時：<%= task.created_at.to_s(:datetime_jp) %></p>
@@ -70,69 +64,8 @@
     
     </div>
 
-    <div class="ran">
-    <h3>人気の投稿ランキング</h3>
-    </div>
-    <table>
-    <tr>
-    <th class="hyou">順位</th><th>フレーズ</th><th class="hyou">いいね数</th>
-    </tr>
-
-
-    <%@ranks=Like.group(:post_id).order('count_post_id DESC').limit(5).count(:post_id)%>
-
-   <%@ranks.each.with_index do |rank,i|%>
-
-
-    <% @tasuku=Task.find_by(id: rank.first) %>
-     <%if @tasuku%>
-
-      
-
-
-
-    <tr>
-
-
-
-      <%if @suuji%>
-
-
-      
-       <% if @suuji != rank.second %>
-        <td><%= @j=i+1  %>位</td>
-        <%else%>
-        <td><%= @j %>位</td>
-        <%end%>
-        
-        <td><%=@tasuku.phrase%></td>
-        <td><%=rank.second%></td>
-
-
-
-
-      <%else%>
-        <td><%= i + 1 %>位</td>
-        <td><%=@tasuku.phrase%></td>
-        <td><%=rank.second%></td>
-      <%end%>
-       
-
-
-
-
-    </tr>
-
-
-    <% @suuji=Like.where(post_id: rank.first).count %>
     
 
-
-     <%end%>
-
-     
-      
-
-
-   <%end%>
-    </table>
+    <div id="ranking_render">
+    <%= render partial: 'ranking', locals: { task: @task} %>
+    </div>
