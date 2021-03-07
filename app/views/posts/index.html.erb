@@ -1,71 +1,58 @@
-<h1 class="minna">みんなの投稿一覧</h1>
+<h1>みんなの投稿一覧</h1>
+
 <div class="container">
 <% @tasks.each do |task| %>
-    <div class="index">
-    <%@user=User.find_by(id:task.user_id)%>
-
+   <%@user=User.find_by(id:task.user_id)%>
+  <div class="index">
     <%if @user%>
-    <div class="indexgazo"">
 
-    <%if @user.avator.attached?%>
-    <%=image_tag @user.avator%>
-    <%else%>
-    <%=image_tag "/user_images/default.jpg"%>
-    <%end%>
-
-    <h3><%=link_to(@user.name,"/users/#{@user.id}")%></h3>
-    </div>
-    <%end%>
-    <div class="postsindex">
-    <h2><%=link_to(task.phrase,"/posts/#{task.id}")%></h2>
-    </div>
-    <div class="postsstatus">
-    <p>説明:<%=link_to(task.content,"/posts/#{task.id}")%></p>
-    </div>
-
+      <div class="index_left">
+       <div class="index_gazo">
+        <%if @user.avator.attached?%>
+         <%=image_tag @user.avator%>
+        <%else%>
+         <%=image_tag "/user_images/default.jpg"%>
+        <%end%>
+       </div>
+        <div class="index_likes_comments">
+         <div id="likes_buttons_<%= task.id %>">
+          <%= render partial: 'like', locals: { task: task} %>
+         </div>
+         <div class="index_comments">
+          <%= link_to("/posts/#{task.id}/comment",class: "fas")do %>
+           <span class="fas fa-comment fa-xs"><%=Comment.where(comment_id: task.id).count%></span>
+          <%end%>
+         </div>
+        </div>
+      </div>
+      
+      <div class="index_right">
+       <div class="index_header">
+        <%=link_to(@user.name,"/users/#{@user.id}")%>
+        <p><%= task.updated_at.to_s(:datetime_jp) %></p>
+       </div>
+      
     
-    
-    <div id="likes_buttons_<%= task.id %>">
-    <%= render partial: 'like', locals: { task: task} %>
-    </div>
-
-
-    <p>投稿日時：<%= task.created_at.to_s(:datetime_jp) %></p>
-    <p>最終更新日時：<%= task.updated_at.to_s(:datetime_jp) %></p>
-    
-    <div class="come">
-    <%= link_to("コメントする","/posts/#{task.id}/comment") %>
-    </div>
-
-    <% @comments=Comment.where(comment_id: task.id)%>
-    <%if @comments%>
-
-    <%@comments.each do |comment|%>
-      <% @user=User.find_by(id: comment.user_id) %>
-      <p><%=link_to(@user.name,"/users/#{@user.id}")%>のコメント：</p>
-    <%if @current_user.id==comment.user_id%>
-    <p>
-    <%=link_to(comment.content,"/comments/#{comment.id}/edit") %>
-    </p>
-    <%else%>
-    <%=comment.content%>
-    <%end%>
     <%end%>
 
-    <%end%>
+       <div class="index_phrase">
+        <%=link_to(task.phrase,"/posts/#{task.id}")%>
+       </div>
+       <div class="index_setu">
+        <%=link_to(task.content,"/posts/#{task.id}")%>
+       </div>
+      </div>
 
+      
 
+  </div>
 
-
-    </div>
-    <%end%>
+<%end%>
+</div>
 
 
     
-    </div>
 
-    
-
-    <div id="ranking_render">
-    <%= render partial: 'ranking', locals: { task: @task} %>
-    </div>
+<div id="ranking_render">
+  <%= render partial: 'ranking', locals: { task: @task} %>
+</div>

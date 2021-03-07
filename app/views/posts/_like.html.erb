@@ -1,11 +1,11 @@
-<p>いいね数:<%=Like.where(post_id:task.id).count%></p>
+
 <% if Like.find_by(user_id: @current_user.id, post_id: task.id) %>
         <%= link_to("/likes/#{task.id}/destroy",method: :post,remote: true) do %>
-          <span class="fa fa-heart like-btn-unlike">いいねを取り消す</span>
+          <span class="fa fa-heart like-btn-unlike fa-xs"><%=Like.where(post_id:task.id).count%></span>
         <% end %>
       <% else %>
         <%= link_to("/likes/#{task.id}/create", method: :post,remote: true) do %>
-          <span class="fa fa-heart like-btn">いいね!</span>
+          <span class="fa fa-heart like-btn fa-xs"><%=Like.where(post_id:task.id).count%></span>
         <% end %>
       <% end %>
 

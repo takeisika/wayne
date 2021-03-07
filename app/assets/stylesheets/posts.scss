@@ -3,36 +3,26 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .like-btn {
   color: #8899a6;
+  padding-left:10px;
 }
 
 .like-btn-unlike {
   color: #ff2581;
+  padding-left:10px;
 }
 
-
-
-
-.indexgazo img{
-  width: 80px;
-  height: 80px;
+.fas{
+  color:#abb0b4;
+  margin-left:5px;
 }
 
-.indexgazo h3{
-  display: inline-block;
-  vertical-align: top;
+.h1{
+    background-color: cornflowerblue;
+    color:rgb(238, 236, 227);
+    opacity:0.7;
+    margin:0;
 }
 
-
-.index{
-  box-shadow: 0 2px 6px #c1ced7;
-  padding: 40px 60px;
-}
-
-
-.postsindex h2{
-  text-align:center;
-  font-size:50px;
-}
 
 .container{
   padding-top:100px;
@@ -41,16 +31,98 @@
   padding-right: 200px;
 }
 
-a{
-  color:black;
+.index {
+  height:100px;
+  box-shadow: 0 2px 6px #c1ced7;
+  padding-top: 20px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  display:flex;
 }
 
-.minna{
-  background-color: cornflowerblue;
-  color:rgb(238, 236, 227);
-  opacity:0.7;
-  margin:0;
+
+.index_left{
+  padding-right:12px;
+  text-align: center;
 }
+
+
+.index_header{
+  display:flex;
+}
+
+.index_header p{
+  color:grey;
+}
+
+.index_gazo img{
+  width: 50px;
+  height: 50px;
+  padding-bottom: 10px;
+}
+
+.index_likes_comments{
+  display:flex;
+  justify-content: space-between;
+}
+
+.index_likes_comments span{
+
+
+}
+
+.index_comments{
+
+}
+
+
+
+.index
+.index_header a{
+  margin:0;
+  font-weight: bold;
+  font-size:12px;
+  padding-right:10px;
+  padding-left:10px;
+}
+
+.index_header p{
+  margin:0;
+  font-size:12px;
+}
+
+.index_phrase{
+  margin:15px;
+}
+
+.index_setu{
+  font-size:12px;
+  padding-right:10px;
+  padding-left:10px;
+}
+
+.index_comment_content span{
+  font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 table {

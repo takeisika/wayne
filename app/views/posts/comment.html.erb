@@ -1,7 +1,63 @@
-<h2>コメントしよう</h2>
+<div class="container">
+<%@user=User.find_by(id:@task.user_id)%>
+<div class="index">
+    <%if @user%>
+
+      <div class="index_left">
+       <div class="index_gazo">
+        <%if @user.avator.attached?%>
+         <%=image_tag @user.avator%>
+        <%else%>
+         <%=image_tag "/user_images/default.jpg"%>
+        <%end%>
+       </div>
+      </div>
+      
+      <div class="index_right">
+       <div class="index_header">
+        <%=link_to(@user.name,"/users/#{@user.id}")%>
+        <p><%= @task.updated_at.to_s(:datetime_jp) %></p>
+       </div>
+      
+    
+    <%end%>
+
+       <div class="index_phrase">
+        <%=link_to(@task.phrase,"/posts/#{@task.id}")%>
+       </div>
+       <div class="index_setu">
+        <%=link_to(@task.content,"/posts/#{@task.id}")%>
+       </div>
+      </div>
+
+      
+    
+
+      
+</div>
+<div class="index_comment">
+       <% @comments=Comment.where(comment_id: @task.id)%>
+       <%if @comments%>
+        <%@comments.each do |comment|%>
+          <% @user=User.find_by(id: comment.user_id) %>
+            <div class="index_comment_content">
+             <span><%=link_to(@user.name,"/users/#{@user.id}")%></span>
+
+              <%if @current_user.id==comment.user_id%>
+                <%=link_to(comment.content,"/comments/#{comment.id}/edit") %>
+              <%else%>
+                <%=comment.content%>
+              <%end%>
+            </div>
+        <%end%>
+       <%end%>
+</div>
 
 <%=form_tag("/posts/#{@task.id}/come")do%>
-<p>コメント入力：</p>
 <input type="text" name="content">
 <input type="submit" value="コメントする">
 <%end%>
+    
+</div>
+
+

@@ -61,7 +61,7 @@ class PostsController < ApplicationController
   def come
     @comment=Comment.new(comment_id: params[:id],content: params[:content],user_id:@current_user.id)
     if @comment.save
-      redirect_to("/posts/index")
+      redirect_to("/posts/#{@comment.comment_id}/comment")
     end
   end
 end
