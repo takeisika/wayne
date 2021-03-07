@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action:ensuring
+  before_action:ensuring,{only:[:edit,:update,:destroy,:comment,:show]}
   before_action:postensure,{only:[:edit,:update,:destroy]}
 
   def index
@@ -50,7 +50,7 @@ class PostsController < ApplicationController
     @task=Task.find_by(id:params[:id])
     if @task.user_id!=@current_user.id
       flash[:notice]="権限がありません"
-      redirect_to("/posts/index")
+      redirect_to("users/login_form")
     end
   end
 

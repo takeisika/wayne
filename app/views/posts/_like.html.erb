@@ -1,4 +1,5 @@
 
+<%if @current_user%>
 <% if Like.find_by(user_id: @current_user.id, post_id: task.id) %>
         <%= link_to("/likes/#{task.id}/destroy",method: :post,remote: true) do %>
           <span class="fa fa-heart like-btn-unlike fa-xs"><%=Like.where(post_id:task.id).count%></span>
@@ -8,6 +9,9 @@
           <span class="fa fa-heart like-btn fa-xs"><%=Like.where(post_id:task.id).count%></span>
         <% end %>
       <% end %>
+<%else%>
+ <span class="fa fa-heart like-btn-unlike fa-xs"><%=Like.where(post_id:task.id).count%></span> 
+<%end%>
 
 
 
