@@ -12,28 +12,59 @@
 <%end%>
 </div>
 <div class="toukouitiran">
-<p class="toukou"><%=link_to("投稿一覧","/users/#{@user.id}")%></p>
-<p class="iineiine"><%=link_to("いいねした投稿一覧","/users/#{@user.id}/likes")%></p>
+<p class="toukou"><%=link_to("投稿","/users/#{@user.id}")%></p>
+<p class="iineiine"><%=link_to("いいねした投稿","/users/#{@user.id}/likes")%></p>
 </div>
+
+
+
+
+
 <%@tasks=Task.where(user_id: @user.id)%>
 <%if @tasks.count >= 1%>
+  <div class="container">
+        <% @tasks.each do |task| %>
+          <%@user=User.find_by(id:task.user_id)%>
+           <div class="index">
+             <%if @user%>
 
-<div class="userindex">
-<% @tasks.each do |task| %>
-    <div class="usershow">
-    <%if @user.avator.attached?%>
-    <%=image_tag @user.avator%>
-    <%else%>
-    <%=image_tag "/user_images/default.jpg"%>
-    <%end%>
-    <h2><%=link_to(@user.name,"/users/#{@user.id}")%></h2>
-    <h3><%=link_to(task.phrase,"/posts/#{task.id}")%></h3>
-    <p>説明:<%=link_to(task.content,"/posts/#{task.id}")%></p>
-    </div>
-    <%end%>
+               <div class="index_left">
+                 <div class="index_gazo">
+                   <%if @user.avator.attached?%>
+                     <%=image_tag @user.avator%>
+                   <%else%>
+                     <%=image_tag "/user_images/default.jpg"%>
+                   <%end%>
+                 </div>
+                 <div class="index_likes_comments">
+                   <div id="likes_buttons_<%= task.id %>">
+                     <%= render partial: 'posts/like', locals: { task: task} %>
+                   </div>
+                   <div class="index_comments">
+                     <%= link_to("/posts/#{task.id}/comment",class: "link")do %>
+                     <span class="fas fa-comment fa-xs"><%=Comment.where(comment_id: task.id).count%></span>
+                     <%end%>
+                   </div>
+                 </div>
+               </div>
+      
+                <div class="index_right">
+                  <div class="index_header">
+                    <%=link_to(@user.name,"/users/#{@user.id}")%>
+                    <p><%= task.updated_at.to_s(:datetime_jp) %></p>
+                  </div>
+                  <div class="index_phrase">
+                    <%=link_to(task.phrase,"/posts/#{task.id}")%>
+                  </div>
+                  <div class="index_setu">
+                    <%=link_to(task.content,"/posts/#{task.id}")%>
+                  </div>
+                </div>
+            <%end%>
+           </div>
+        <%end%>
     </div>
 
-    <%else%>
-    <p>投稿はまだありません!</p>
-    <%end%>
-    
+<%else%>
+ <p>投稿はまだありません!</p>
+<%end%>

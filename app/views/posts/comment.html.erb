@@ -41,6 +41,11 @@
         <%@comments.each do |comment|%>
           <% @user=User.find_by(id: comment.user_id) %>
             <div class="index_comment_content">
+              <%if @user.avator.attached?%>
+               <%=image_tag @user.avator%>
+              <%else%>
+               <%=image_tag "/user_images/default.jpg"%>
+              <%end%>
              <span><%=link_to(@user.name,"/users/#{@user.id}")%></span>
 
               <%if @current_user.id==comment.user_id%>

@@ -19,12 +19,13 @@
           <%= render partial: 'like', locals: { task: task} %>
          </div>
          <div class="index_comments">
-          <%= link_to("/posts/#{task.id}/comment",class: "fas")do %>
+          <%= link_to("/posts/#{task.id}/comment",class: "link")do %>
            <span class="fas fa-comment fa-xs"><%=Comment.where(comment_id: task.id).count%></span>
           <%end%>
          </div>
         </div>
       </div>
+ 
       
       <div class="index_right">
        <div class="index_header">
