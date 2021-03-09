@@ -12,9 +12,7 @@
       <div class="index_left">
        <div class="index_gazo">
         <%if @user.avator.attached?%>
-        <a href=@user.avator data-lightbox="group">
           <%=image_tag @user.avator%>
-        </a>
         <%else%>
          <a href="/user_images/default.jpg" data-lightbox="group">
           <%=image_tag "/user_images/default.jpg"%>
