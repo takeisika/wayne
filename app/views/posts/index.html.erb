@@ -14,9 +14,7 @@
         <%if @user.avator.attached?%>
           <%=image_tag @user.avator%>
         <%else%>
-         <a href="/user_images/default.jpg" data-lightbox="group">
           <%=image_tag "/user_images/default.jpg"%>
-         </a>
         <%end%>
        </div>
         <div class="index_likes_comments">
