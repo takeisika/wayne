@@ -49,9 +49,11 @@
 
       
       <div class="comment_edit">
+      <%if @current_user%>
       <%if @current_user.id==task.user_id%>
         <object><%=link_to("編集","/posts/#{task.id}/edit")%></object>
         <object><%=link_to("削除","/posts/#{task.id}/destroy",{method: "post"})%></object>
+       <%end%>
        <%end%>
      </div>
 
