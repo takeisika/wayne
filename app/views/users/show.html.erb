@@ -25,43 +25,49 @@
   <div class="container">
         <% @tasks.each do |task| %>
           <%@user=User.find_by(id:task.user_id)%>
+          <%= link_to("/posts/#{task.id}/comment",class: "link")do %>
            <div class="index">
              <%if @user%>
 
                <div class="index_left">
                  <div class="index_gazo">
-                   <%if @user.avator.attached?%>
-                     <%=image_tag @user.avator%>
-                   <%else%>
-                     <%=image_tag "/user_images/default.jpg"%>
-                   <%end%>
+                  <%if @user.avator.attached?%>
+                   <object><%= link_to("/users/#{@user.id}")do %>
+                   <%=image_tag @user.avator%>
+                   <%end%></object>
+                  <%else%>
+                   <object><%= link_to("/users/#{@user.id}")do %>
+                   <%=image_tag "/user_images/default.jpg"%>
+                   <%end%></object>
+                  <%end%>
                  </div>
                  <div class="index_likes_comments">
-                   <div id="likes_buttons_<%= task.id %>">
+                   <object><div id="likes_buttons_<%= task.id %>">
                      <%= render partial: 'posts/like', locals: { task: task} %>
-                   </div>
+                   </div></object>
                    <div class="index_comments">
-                     <%= link_to("/posts/#{task.id}/comment",class: "link")do %>
+                     <object><%= link_to("/posts/#{task.id}/comment",class: "link")do %>
                      <span class="fas fa-comment fa-xs"><%=Comment.where(comment_id: task.id).count%></span>
-                     <%end%>
+                     <%end%></object>
                    </div>
                  </div>
                </div>
       
                 <div class="index_right">
                   <div class="index_header">
-                    <%=link_to(@user.name,"/users/#{@user.id}")%>
+                    <object><%=link_to(@user.name,"/users/#{@user.id}")%></object>
                     <p><%= task.updated_at.to_s(:datetime_jp) %></p>
                   </div>
                   <div class="index_phrase">
-                    <%=link_to(task.phrase,"/posts/#{task.id}")%>
+                    <%=task.phrase%>
                   </div>
                   <div class="index_setu">
-                    <%=link_to(task.content,"/posts/#{task.id}")%>
+                    <%=task.content%>
                   </div>
                 </div>
             <%end%>
            </div>
+           <%end%>
         <%end%>
     </div>
 

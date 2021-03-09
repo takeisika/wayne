@@ -17,24 +17,46 @@
        <div class="index_header">
         <%=link_to(@user.name,"/users/#{@user.id}")%>
         <p><%= @task.updated_at.to_s(:datetime_jp) %></p>
-       </div>
+        </div>
+
+
+
+        
+
       
     
+
+
+
     <%end%>
 
        <div class="index_phrase">
-        <%=link_to(@task.phrase,"/posts/#{@task.id}")%>
+        <%=link_to(@task.phrase,"/posts/#{@task.id}/comment")%>
        </div>
        <div class="index_setu">
-        <%=link_to(@task.content,"/posts/#{@task.id}")%>
+        <%=link_to(@task.content,"/posts/#{@task.id}/comment")%>
        </div>
       </div>
-
       
-    
 
-      
+      <div class="comment_edit">
+      <%if @current_user.id==@task.user_id%>
+         <%=link_to("編集","/posts/#{@task.id}/edit")%>
+         <%=link_to("削除","/posts/#{@task.id}/destroy",{method: "post"})%>
+        <%end%>
+        </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
 <div class="index_comment">
        <% @comments=Comment.where(comment_id: @task.id)%>
        <%if @comments%>
@@ -47,13 +69,14 @@
                <%=image_tag "/user_images/default.jpg"%>
               <%end%>
              <span><%=link_to(@user.name,"/users/#{@user.id}")%></span>
-
+             
+             
               <%if @current_user.id==comment.user_id%>
                 <%=link_to(comment.content,"/comments/#{comment.id}/edit") %>
               <%else%>
                 <%=comment.content%>
               <%end%>
-            </div>
+            
         <%end%>
        <%end%>
 </div>

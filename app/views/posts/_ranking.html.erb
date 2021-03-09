@@ -1,5 +1,5 @@
 <div class="ran">
-    <h3>人気の投稿ランキング</h3>
+    <h3>👑人気ランキング👑</h3>
     </div>
     <table>
     <tr>
@@ -35,7 +35,7 @@
         <td><%= @j %>位</td>
         <%end%>
         
-        <td><%=@tasuku.phrase%></td>
+        <td><%=link_to(@tasuku.phrase,"/posts/#{rank.first}/comment")%></td>
         <td><%=rank.second%></td>
 
 
@@ -43,7 +43,7 @@
 
       <%else%>
         <td><%= i + 1 %>位</td>
-        <td><%=@tasuku.phrase%></td>
+        <td><%=link_to(@tasuku.phrase,"/posts/#{rank.first}/comment")%></td>
         <td><%=rank.second%></td>
       <%end%>
        
