@@ -42,7 +42,7 @@
 
 
       <%else%>
-        <td><%= i + 1 %>位</td>
+        <td><%= @j=i + 1 %>位</td>
         <td><%=link_to(@tasuku.phrase,"/posts/#{rank.first}/comment")%></td>
         <td><%=rank.second%></td>
       <%end%>
