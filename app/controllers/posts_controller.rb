@@ -42,6 +42,8 @@ class PostsController < ApplicationController
   def destroy
     @task=Task.find_by(id: params[:id])
     @task.destroy
+    @likes=Like.where(post_id: params[:id],user_id: @current_user.id)
+    @likes.destroy_all
     flash[:notice]="削除完了"
     redirect_to("/posts/index")
   end

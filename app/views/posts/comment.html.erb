@@ -5,11 +5,11 @@
 
       <div class="index_left">
        <div class="index_gazo">
-        <%if @user.avator.attached?%>
-         <%=image_tag @user.avator%>
-        <%else%>
-         <%=image_tag "/user_images/default.jpg"%>
-        <%end%>
+       <%if @user.avator.attached?%>
+       <object><%= link_to image_tag(@user.avator),@user.avator, :rel => "lightbox" %></object>
+       <%else%>
+       <object><a href="/user_images/default.jpg" data-lightbox="group"><%=image_tag "/user_images/default.jpg"%></a></object>
+       <%end%>
        </div>
       </div>
       
