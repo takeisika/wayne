@@ -12,9 +12,9 @@
       <div class="index_left">
        <div class="index_gazo">
         <%if @user.avator.attached?%>
-        <object><a href=@user.avator data-lightbox="group"><%=image_tag @user.avator%></object>
+        <object><%= link_to image_tag(@user.avator),@user.avator, :rel => "lightbox" %></object>
         <%else%>
-        <object><a href="/user_images/default.jpg" data-lightbox="group"><%=image_tag "/user_images/default.jpg"%></object>
+        <object><a href="/user_images/default.jpg" data-lightbox="group"><%=image_tag "/user_images/default.jpg"%></a></object>
         <%end%>
        </div>
         <div class="index_likes_comments">
