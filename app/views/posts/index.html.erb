@@ -6,9 +6,8 @@
 <% @posts.each do |post| %>
    <%@user=User.find_by(id:post.user_id)%>
    <%if @user%>
-   <%= link_to("/posts/#{post.id}/comment",class: "link")do %>
-  <div class="index">
-
+    <%= link_to("/posts/#{post.id}/comment",class: "link")do %>
+     <div class="index">
       <div class="index_left">
        <div class="index_gazo">
         <%if @user.avator.attached?%>
@@ -37,7 +36,7 @@
        </div>
       
     
-    <%end%>
+    
 
        <div class="index_title">
         <%=post.title%>
@@ -61,7 +60,7 @@
 
        <%if post.movies.attached?%>
        <% post.movies.each do |movie| %>
-       <video src="<%= rails_blob_path(movie) %>" type="video/mp4" controls></video>
+       <object><video src="<%= rails_blob_path(movie) %>" type="video/mp4" controls></video></object>
        <%end%>
        <%end%>
       </div>
@@ -79,6 +78,7 @@
       
 
   </div>
+  <%end%>
   <%end%>
 <%end%>
 </div>
