@@ -5,9 +5,9 @@
 <div class="container">
 <% @posts.each do |post| %>
    <%@user=User.find_by(id:post.user_id)%>
+   <%if @user%>
    <%= link_to("/posts/#{post.id}/comment",class: "link")do %>
   <div class="index">
-    <%if @user%>
 
       <div class="index_left">
        <div class="index_gazo">
