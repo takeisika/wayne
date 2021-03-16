@@ -207,6 +207,6 @@ ja:
 ja:
   activerecord:
     attributes:
-      task:
-        phrase: フレーズ
+      post:
+        title: タイトル
         content: 説明

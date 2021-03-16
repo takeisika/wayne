@@ -1,11 +1,11 @@
 <div id="ranking_render">
-  <%= render partial: 'ranking', locals: { task: @task} %>
+  <%= render partial: 'ranking', locals: { post: @post} %>
 </div>
 
 <div class="container">
-<% @tasks.each do |task| %>
-   <%@user=User.find_by(id:task.user_id)%>
-   <%= link_to("/posts/#{task.id}/comment",class: "link")do %>
+<% @posts.each do |post| %>
+   <%@user=User.find_by(id:post.user_id)%>
+   <%= link_to("/posts/#{post.id}/comment",class: "link")do %>
   <div class="index">
     <%if @user%>
 
@@ -18,12 +18,12 @@
         <%end%>
        </div>
         <div class="index_likes_comments">
-         <object><div id="likes_buttons_<%= task.id %>">
-          <%= render partial: 'like', locals: { task: task} %>
+         <object><div id="likes_buttons_<%= post.id %>">
+          <%= render partial: 'like', locals: { post: post} %>
          </div></object>
          <div class="index_comments">
           
-           <span class="fas fa-comment fa-xs"><%=Comment.where(comment_id: task.id).count%></span>
+           <span class="fas fa-comment fa-xs"><%=Comment.where(comment_id: post.id).count%></span>
           
          </div>
         </div>
@@ -33,26 +33,45 @@
       <div class="index_right">
        <div class="index_header">
        <object><%=link_to(@user.name,"/users/#{@user.id}")%></object>
-        <p><%= task.updated_at.to_s(:datetime_jp) %></p>
+        <p><%= post.updated_at.to_s(:datetime_jp) %></p>
        </div>
       
     
     <%end%>
 
-       <div class="index_phrase">
-       <object><%=task.phrase%></object>
+       <div class="index_title">
+        <%=post.title%>
        </div>
        <div class="index_setu">
-       <object><%=task.content%></object>
+        <%=post.content%>
        </div>
+
+
+       <%if post.tube?%>
+       <%@post_tube=post.tube%>
+       <%@post_tube=@post_tube.last(11)%>
+       <object><iframe src="https://www.youtube.com/embed/<%=@post_tube%>" type="video/mp4" controls></iframe></object>
+       <%end%>
+
+       <%if post.files.attached?%>
+       <% post.files.each do |file| %>
+          <object><%= link_to image_tag(file),file, :rel => "lightbox" %></object>
+       <%end%>
+       <%end%>
+
+       <%if post.movies.attached?%>
+       <% post.movies.each do |movie| %>
+       <video src="<%= rails_blob_path(movie) %>" type="video/mp4" controls></video>
+       <%end%>
+       <%end%>
       </div>
 
       
       <div class="comment_edit">
       <%if @current_user%>
-      <%if @current_user.id==task.user_id%>
-        <object><%=link_to("編集","/posts/#{task.id}/edit")%></object>
-        <object><%=link_to("削除","/posts/#{task.id}/destroy",{method: "post"})%></object>
+      <%if @current_user.id==post.user_id%>
+        <object><%=link_to("編集","/posts/#{post.id}/edit")%></object>
+        <object><%=link_to("削除","/posts/#{post.id}/destroy",{method: "post"})%></object>
        <%end%>
        <%end%>
      </div>
@@ -60,13 +79,7 @@
       
 
   </div>
-
-
-
-
-
   <%end%>
-  
 <%end%>
 </div>
 

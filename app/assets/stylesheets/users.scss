@@ -91,3 +91,101 @@ a{
 
 
 
+
+
+
+
+
+
+.user_show{
+  text-align:center;
+}
+
+
+.user_show img{
+  margin-top:100px;
+  width:80px;
+  height:80px;
+  border-radius: 20px;
+}
+
+
+.user_show img:hover{
+  opacity:0.7;
+}
+
+
+.user_show_name{
+  margin:0;
+  font-weight: bold;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-size:20px;
+}
+
+
+.user_show_profile_edit{
+  padding:5px;
+  margin:15px;
+  border: 1px solid rgb(172, 181, 185);
+  background-color:rgb(219, 225, 226);
+  border-radius: 10px;
+  font-size:13px;
+}
+
+.user_show_profile_edit :hover{
+  opacity:0.6;
+}
+
+
+
+
+
+.user_show i{
+  color:rgb(17, 126, 228)
+}
+
+.user_show i:hover{
+  opacity:0.7;
+}
+
+
+
+.user_show_list_button_at_post a:hover{
+   opacity:0.6;
+}
+
+
+.user_show_list_post_button_at_post a{
+  border-bottom: 1px solid rgb(5, 247, 235);
+}
+
+
+.user_show_list_like_button_at_post a{
+  color: rgb(175, 172, 172);
+}
+
+
+
+.user_show_list_button_at_like a:hover{
+  opacity:0.6;
+}
+
+
+.user_show_list_post_button_at_like a{
+  color: rgb(175, 172, 172);
+}
+
+
+.user_show_list_like_button_at_like a{
+ border-bottom: 1px solid rgb(5, 247, 235);
+}
+
+
+
+
+
+
+
+.user_show_list_else{
+  text-align:center;
+}

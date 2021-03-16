@@ -1,3 +1,3 @@
-$('#likes_buttons_<%= @task.id %>').html("<%= j(render partial: 'posts/like', locals: {task: @task}) %>");
+$('#likes_buttons_<%= @post.id %>').html("<%= j(render partial: 'posts/like', locals: {post: @post}) %>");
 
-$('#ranking_render').html("<%= j(render partial: 'posts/ranking', locals: {task: @task}) %>");
+$('#ranking_render').html("<%= j(render partial: 'posts/ranking', locals: {post: @post}) %>");

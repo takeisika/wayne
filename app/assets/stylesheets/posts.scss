@@ -32,7 +32,7 @@
 }
 
 .index {
-  height:100px;
+  height:100%;
   box-shadow: 0 2px 6px #c1ced7;
   padding-top: 20px;
   padding-bottom: 15px;
@@ -40,7 +40,6 @@
   padding-right: 15px;
   display:flex;
 }
-
 
 .index_left{
   padding-right:12px;
@@ -89,7 +88,7 @@
   opacity:0.6;
 }
 
-.index_phrase{
+.index_title{
   margin:15px;
 }
 
@@ -120,9 +119,16 @@
    color:grey;
 }
 
+.comment_toukou_button{
+  color:white;
+  background-color: rgb(9, 95, 224);
+  padding:0;
+  border-radius: 10px;
+}
 
-
-
+.comment_toukou_button:hover{
+  opacity:0.6;
+}
 
 
 
@@ -137,12 +143,25 @@
 table {
   border-collapse: collapse;
   text-align:center;
-  width:70%;
+  width:30%;
   margin: 0 auto;
 }
+
+table a:hover{
+  opacity:0.6;
+}
+
 table th, table td {
   border: solid 1px black;
   /*実線 1px 黒*/
+}
+
+table {
+  background-color: rgb(243, 243, 214);
+}
+
+table th{
+  background-color: rgb(214, 197, 101);
 }
 
 .ran{
@@ -155,4 +174,49 @@ table th, table td {
 
 .come a{
   color:blue;
+}
+
+.hyou_span span{
+  font-weight: bold;
+}
+
+.ran h3{
+  margin-top:60px;
+}
+
+
+
+.index_right img{
+  width:150px;
+  height:150px;
+  margin:25px;
+}
+
+.index_right video{
+  width:150px;
+  height:150px;
+  margin:25px;
+}
+
+
+.index_right iframe{
+  width:300px;
+  height:200px;
+  margin:25px;
+}
+
+
+
+.form_button{
+  padding-top:120px;
+}
+
+.form_button input{
+  background-color:rgb(0, 132, 255);
+  color:white;
+  border-radius: 10px;
+}
+
+.form_button input:hover{
+  opacity:0.7;
 }

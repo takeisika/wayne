@@ -1,22 +1,40 @@
 <%@user=User.find_by(id:params[:id])%>
-<div class="user">
-<div class="likesuser">
 
-<%if @user.avator.attached?%>
-  <object><%= link_to image_tag(@user.avator),@user.avator, :rel => "lightbox" %></object>
-<%else%>
-  <object><a href="/user_images/default.jpg" data-lightbox="group"><%=image_tag "/user_images/default.jpg"%></a></object>
-<%end%>
-    
-<h2><%=@user.name%></h2>
-</div>
-<%if @current_user.id==@user.id%>
-<p><%=link_to("プロフィールを編集","/users/#{@user.id}/edit")%></p>
-<%end%>
-</div>
-<div class="itiran">
-<p class="itiranitiran"><%=link_to("投稿","/users/#{@user.id}")%></p>
-<p class="itiraniine"><%=link_to("いいねした投稿","/users/#{@user.id}/likes")%></p>
+<div class="user_show">
+     <div class="user_show_top">
+        <%if @user.avator.attached?%>
+          <object><%= link_to image_tag(@user.avator),@user.avator, :rel => "lightbox" %></object>
+        <%else%>
+          <object><a href="/user_images/default.jpg" data-lightbox="group"><%=image_tag "/user_images/default.jpg"%></a></object>
+        <%end%>
+
+        <p class="user_show_name"><%=@user.name%></p>
+        
+      </div>
+
+
+
+        <%if @current_user.id==@user.id%>
+          <p>
+            <span class="user_show_profile_edit"><%=link_to("プロフィールを編集","/users/#{@user.id}/edit")%></span>
+          </p>
+        <%end%>
+
+
+        <%if @current_user.id!=@user.id%>
+          <%= link_to("/talks/#{@user.id}",method: :post) do %>
+          <i class="fas fa-envelope-square fa-2x"></i></span>
+          <% end %>
+        <%end%>
+
+
+
+        <div class="user_show_list_button_at_like">
+          <span class="user_show_list_post_button_at_like"><%=link_to("投稿","/users/#{@user.id}")%></span>
+          <span class="user_show_list_like_button_at_like"><%=link_to("いいね","/users/#{@user.id}/likes")%></span>
+        </div>
+
+
 </div>
 
 
@@ -33,12 +51,12 @@
 <%if @likes.count >= 1%>
   <div class="container">
         <%@likes.each do |like|%>
-          <%@task=Task.find_by(id: like.post_id)%>
-          <%= link_to("/posts/#{@task.id}/comment",class: "link")do %>
+          <%@post=Post.find_by(id: like.post_id)%>
+          <%= link_to("/posts/#{@post.id}/comment",class: "link")do %>
            <div class="index">
-             <%if @task%>
+             <%if @post%>
 
-              <%@user=User.find_by(id:@task.user_id)%>
+              <%@user=User.find_by(id:@post.user_id)%>
                <div class="index_left">
                  <div class="index_gazo">
                  <%if @user.avator.attached?%>
@@ -48,12 +66,12 @@
                  <%end%>
                  </div>
                  <div class="index_likes_comments">
-                   <object><div id="likes_buttons_<%= @task.id %>">
-                     <%= render partial: 'posts/like', locals: { task: @task} %>
+                   <object><div id="likes_buttons_<%= @post.id %>">
+                     <%= render partial: 'posts/like', locals: { post: @post} %>
                    </div></object>
                    <div class="index_comments">
-                     <object><%= link_to("/posts/#{@task.id}/comment",class: "link")do %>
-                     <span class="fas fa-comment fa-xs"><%=Comment.where(comment_id: @task.id).count%></span>
+                     <object><%= link_to("/posts/#{@post.id}/comment",class: "link")do %>
+                     <span class="fas fa-comment fa-xs"><%=Comment.where(comment_id: @post.id).count%></span>
                      <%end%></object>
                    </div>
                  </div>
@@ -62,14 +80,36 @@
                 <div class="index_right">
                   <div class="index_header">
                     <object><%=link_to(@user.name,"/users/#{@user.id}")%></object>
-                    <p><%= @task.updated_at.to_s(:datetime_jp) %></p>
+                    <p><%= @post.updated_at.to_s(:datetime_jp) %></p>
                   </div>
-                  <div class="index_phrase">
-                    <%=@task.phrase%>
+                  <div class="index_title">
+                    <%=@post.title%>
                   </div>
                   <div class="index_setu">
-                    <%=@task.content%>
+                    <%=@post.content%>
                   </div>
+
+
+                  <%if @post.tube?%>
+                    <%@post_tube=@post.tube%>
+                    <%@post_tube=@post_tube.last(11)%>
+                    <object><iframe src="https://www.youtube.com/embed/<%=@post_tube%>" type="video/mp4" controls></iframe></object>
+                  <%end%>
+
+                  <%if @post.files.attached?%>
+                    <% @post.files.each do |file| %>
+                      <object><%= link_to image_tag(file),file, :rel => "lightbox" %></object>
+                    <%end%>
+                  <%end%>
+
+                  <%if @post.movies.attached?%>
+                   <% @post.movies.each do |movie| %>
+                   <video src="<%= rails_blob_path(movie) %>" type="video/mp4" controls></video>
+                  <%end%>
+                  
+                  <%end%>
+
+
                 </div>
             <%end%>
            </div>
@@ -78,5 +118,7 @@
     </div>
 
 <%else%>
+<div class="user_show_list_else">
  <p>いいねした投稿はまだありません!</p>
+</div>
 <%end%>

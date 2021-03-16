@@ -1,5 +1,5 @@
 <div class="container">
-<%@user=User.find_by(id:@task.user_id)%>
+<%@user=User.find_by(id:@post.user_id)%>
 <div class="index">
     <%if @user%>
 
@@ -16,7 +16,7 @@
       <div class="index_right">
        <div class="index_header">
         <%=link_to(@user.name,"/users/#{@user.id}")%>
-        <p><%= @task.updated_at.to_s(:datetime_jp) %></p>
+        <p><%= @post.updated_at.to_s(:datetime_jp) %></p>
         </div>
 
 
@@ -30,19 +30,65 @@
 
     <%end%>
 
-       <div class="index_phrase">
-        <%=link_to(@task.phrase,"/posts/#{@task.id}/comment")%>
+       <div class="index_title">
+        <%=link_to(@post.title,"/posts/#{@post.id}/comment")%>
        </div>
        <div class="index_setu">
-        <%=link_to(@task.content,"/posts/#{@task.id}/comment")%>
+        <%=link_to(@post.content,"/posts/#{@post.id}/comment")%>
        </div>
+
+
+       <%if @post.tube?%>
+       <%@post_tube=@post.tube%>
+       <%@post_tube=@post_tube.last(11)%>
+       <object><iframe src="https://www.youtube.com/embed/<%=@post_tube%>" type="video/mp4" controls></iframe></object>
+       <%end%>
+
+       <%if @post.files.attached?%>
+       <% @post.files.each do |file| %>
+          <object><%= link_to image_tag(file),file, :rel => "lightbox" %></object>
+       <%end%>
+       <%end%>
+
+       <%if @post.movies.attached?%>
+       <% @post.movies.each do |movie| %>
+       <video src="<%= rails_blob_path(movie) %>" type="video/mp4" controls></video>
+       <%end%>
+       <%end%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       </div>
+
+
+
+
+      
+
+
+
+
       
 
       <div class="comment_edit">
-      <%if @current_user.id==@task.user_id%>
-         <%=link_to("編集","/posts/#{@task.id}/edit")%>
-         <%=link_to("削除","/posts/#{@task.id}/destroy",{method: "post"})%>
+      <%if @current_user.id==@post.user_id%>
+         <%=link_to("編集","/posts/#{@post.id}/edit")%>
+         <%=link_to("削除","/posts/#{@post.id}/destroy",{method: "post"})%>
         <%end%>
         </div>
 </div>
@@ -58,7 +104,7 @@
 
 
 <div class="index_comment">
-       <% @comments=Comment.where(comment_id: @task.id)%>
+       <% @comments=Comment.where(comment_id: @post.id)%>
        <%if @comments%>
         <%@comments.each do |comment|%>
           <% @user=User.find_by(id: comment.user_id) %>
@@ -81,9 +127,9 @@
        <%end%>
 </div>
 
-<%=form_tag("/posts/#{@task.id}/come")do%>
+<%=form_tag("/posts/#{@post.id}/come")do%>
 <input type="text" name="content">
-<input type="submit" value="コメントする">
+<input type="submit" value="コメントする" class="comment_toukou_button">
 <%end%>
     
 </div>

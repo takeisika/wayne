@@ -1,11 +1,23 @@
-<% @task.errors.full_messages.each do |message| %>
+<% @post.errors.full_messages.each do |message| %>
     <div class="edit-error">
       <%= message %>
     </div>
   <% end %>
 <p>編集してみよう!</p>
-<%=form_tag("/posts/#{@task.id}/update")do%>
-<textarea name="updatestatus"><%=@task.phrase%></textarea>
-<textarea name="update"><%=@task.content%></textarea>
-<input type="submit" value="編集完了">
-<%end%>
+
+
+<%= form_with model:@post,local:true do |form| %>
+  <p>フレーズ</p>
+  <%= form.text_field :title %>
+  <p>説明</p>
+  <%= form.text_area :content %>
+  <p>画像</p>
+  <%= form.file_field :files,multiple: true %>
+  <p>動画</p>
+  <%= form.file_field :movies,multiple: true %>
+  <p>URL(Youtube)</p>
+  <%= form.text_field :tube %>
+  <div class="form_button">
+  <%= form.submit %>
+  </div>
+  <%end%>

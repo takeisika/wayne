@@ -1,0 +1,52 @@
+
+<div class="talk">
+
+ <div class="talk_header">
+  <p class="talk_header_name"><%=@user.name%></p>
+ </div>
+
+<%@talks.each do |talk|%>
+    <%if (@current_user.id==talk.my_id&&@user.id==talk.your_id)||(@current_user.id==talk.your_id&&@user.id==talk.my_id)%>
+    <%@submit_user=User.find_by(id: talk.my_id)%>
+
+     <%if @submit_user.id==@current_user.id%>
+       <p class="talk_submit_user">
+         <span><%=talk.content%></span>
+       </p>
+     <%else%>
+       <p class="talk_receive_user">
+         <%if @user.avator.attached?%>
+           <object><%= link_to image_tag(@user.avator),@user.avator, :rel => "lightbox" %></object>
+         <%else%>
+           <object><a href="/user_images/default.jpg" data-lightbox="group"><%=image_tag "/user_images/default.jpg"%></a></object>
+         <%end%>
+
+        <span>
+         <%=talk.content%>
+        </span>
+
+       </p>
+     <%end%>
+
+    <%end%>
+<%end%>
+
+
+
+
+  <%=form_tag("/talks/#{@user.id}/create")do%>
+
+     <textarea name="content"></textarea>
+    
+     <input type="submit" value="送信">
+
+    
+
+  <%end%>
+
+
+
+
+</div>
+
+

@@ -3,7 +3,7 @@
     </div>
     <table>
     <tr>
-    <th class="hyou">順位</th><th>フレーズ</th><th class="hyou">いいね数</th>
+    <th class="hyou">順位</th><th>投稿</th><th class="hyou">いいね数</th>
     </tr>
 
 
@@ -14,7 +14,8 @@
    <%@ranks.each.with_index do |rank,i|%>
 
 
-    <% @tasuku=Task.find_by(id: rank.first) %>
+    <% @tasuku=Post.find_by(id: rank.first) %>
+    <% @user=User.find_by(id: @tasuku.user_id)%>
      <%if @tasuku%>
 
       
@@ -35,7 +36,7 @@
         <td><%= @j %>位</td>
         <%end%>
         
-        <td><%=link_to(@tasuku.phrase,"/posts/#{rank.first}/comment")%></td>
+        <td class="hyou_span"><span><%=link_to(@user.name,"/users/#{@user.id}")%></span>さん：<%=link_to(@tasuku.title,"/posts/#{rank.first}/comment")%></td>
         <td><%=rank.second%></td>
 
 
@@ -43,7 +44,7 @@
 
       <%else%>
         <td><%= @j=i + 1 %>位</td>
-        <td><%=link_to(@tasuku.phrase,"/posts/#{rank.first}/comment")%></td>
+        <td class="hyou_span"><span><%=link_to(@user.name,"/users/#{@user.id}")%></span>さん：<%=link_to(@tasuku.title,"/posts/#{rank.first}/comment")%></td>
         <td><%=rank.second%></td>
       <%end%>
        

@@ -3,16 +3,16 @@ class PostsController < ApplicationController
   before_action:postensure,{only:[:edit,:update,:destroy]}
 
   def index
-    @tasks=Task.all
+    @posts=Post.all
   end
 
   def _form
-    @task=Task.new
+    @post=Post.new
   end
 
   def create
-    @task=Task.new(content: params[:task], phrase: params[:phrase],user_id:@current_user.id)
-    if @task.save
+    @post=Post.new(post_params)
+    if @post.save
       redirect_to("/posts/index")
     else
       render("posts/_form")
@@ -20,18 +20,17 @@ class PostsController < ApplicationController
   end
 
   def show
-    @task=Task.find_by(id: params[:id])
+    @post=Post.find_by(id: params[:id])
   end
 
   def edit
-    @task=Task.find_by(id: params[:id])
+    @post=Post.find_by(id: params[:id])
   end
 
   def update
-    @task=Task.find_by(id: params[:id])
-    @task.content=params[:update]
-    @task.phrase=params[:updatestatus]
-    if @task.save
+    @post=Post.find_by(id: params[:id])
+
+    if @post.update(post_params)
     flash[:notice]="編集完了"
     redirect_to("/posts/index")
     else
@@ -40,8 +39,8 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @task=Task.find_by(id: params[:id])
-    @task.destroy
+    @post=Post.find_by(id: params[:id])
+    @post.destroy
     @likes=Like.where(post_id: params[:id],user_id: @current_user.id)
     @likes.destroy_all
     flash[:notice]="削除完了"
@@ -49,15 +48,15 @@ class PostsController < ApplicationController
   end
 
   def postensure
-    @task=Task.find_by(id:params[:id])
-    if @task.user_id!=@current_user.id
+    @post=Post.find_by(id:params[:id])
+    if @post.user_id!=@current_user.id
       flash[:notice]="権限がありません"
       redirect_to("users/login_form")
     end
   end
 
   def comment
-    @task=Task.find_by(id: params[:id])
+    @post=Post.find_by(id: params[:id])
   end
 
   def come
@@ -65,5 +64,10 @@ class PostsController < ApplicationController
     if @comment.save
       redirect_to("/posts/#{@comment.comment_id}/comment")
     end
+  end
+
+  private
+  def post_params
+    params.require(:post).permit(:title,:content,:tube,files: [],movies: []).merge(user_id:@current_user.id)
   end
 end

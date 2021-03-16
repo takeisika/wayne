@@ -23,8 +23,13 @@
 .new a{
     padding:10px;
     color:white;
+    font-weight:bold;
 }
 
 .new p{
     margin:0;
+}
+
+.new a:hover{
+    opacity:0.7;
 }
