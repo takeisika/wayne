@@ -10,22 +10,26 @@
     <%@submit_user=User.find_by(id: talk.my_id)%>
 
      <%if @submit_user.id==@current_user.id%>
-       <p class="talk_submit_user">
-         <span><%=talk.content%></span>
+      <div class="talk_submit_user">
+       <p class="talk_submit_user_content">
+         <%=talk.content%>
        </p>
+       </div>
      <%else%>
-       <p class="talk_receive_user">
+       
+        <div class="talk_receive_user">
          <%if @user.avator.attached?%>
            <object><%= link_to image_tag(@user.avator),@user.avator, :rel => "lightbox" %></object>
          <%else%>
            <object><a href="/user_images/default.jpg" data-lightbox="group"><%=image_tag "/user_images/default.jpg"%></a></object>
          <%end%>
 
-        <span>
-         <%=talk.content%>
-        </span>
-
-       </p>
+        
+         <p class="talk_receive_user_content">
+          <%=talk.content%>
+         </p>
+        </div>
+        
      <%end%>
 
     <%end%>
