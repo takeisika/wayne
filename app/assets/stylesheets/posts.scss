@@ -32,18 +32,25 @@
 }
 
 .index {
-  height:100%;
+  height:auto;
   box-shadow: 0 2px 6px #c1ced7;
   padding-top: 20px;
   padding-bottom: 15px;
   padding-left: 15px;
   padding-right: 15px;
   display:flex;
+  justify-content: space-between;
+}
+
+.index_right_left{
+  display: flex;
+  width:92%;
 }
 
 .index_left{
   padding-right:12px;
   text-align: center;
+  width:7%;
 }
 
 
@@ -98,37 +105,79 @@
   padding-left:10px;
 }
 
-.index_comment_content span{
+
+
+.index_comment{
+  margin-top:15px;
+}
+
+.index_comment_name_content{
+  margin-top:1px;
+  margin-left:5px;
+
+}
+
+
+.index_comment_name{
   font-weight: bold;
 }
 
-.index_comment_content img{
-  width:30px;
-  height:30px;
+.index_comment_name_content img{
+  width:15px;
+  height:15px;
+  border-radius: 10px;
+  
 }
 
 
 .comment_edit{
-  margin-left:auto;
+  width:8%;
   font-size:12px;
-  margin-right:15px;
 }
 
 .comment_edit a{
-   text-decoration: underline;
-   color:grey;
+  text-decoration: underline;
+  color:grey;
 }
+
+
+
+
+.comment_button_text_area{
+  margin-top:15px;
+}
+
+
+
+.comment_button_text_area form{
+  display:flex;
+  justify-content: space-between;
+}
+
+
+.comment_text_area{
+  width:90%;
+}
+
 
 .comment_toukou_button{
   color:white;
   background-color: rgb(9, 95, 224);
-  padding:0;
-  border-radius: 10px;
+  padding:0; 
+  width:10%;
 }
 
 .comment_toukou_button:hover{
   opacity:0.6;
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -186,23 +235,105 @@ table th{
 
 
 
-.index_right img{
-  width:150px;
-  height:150px;
-  margin:25px;
+
+
+
+
+
+
+.index_right{
+  width:93%;
 }
 
-.index_right video{
-  width:150px;
-  height:150px;
-  margin:25px;
+
+.index_right_file{
+  text-align: center;
 }
+
+
+.index_right img{
+  border-radius: 10px;
+  border: solid 3px rgb(218, 217, 217);
+}
+
+.index_right img:hover{
+  opacity:0.8;
+}
+
+.one img{
+  width:60%;
+  height:300px;
+}
+
+.two img{
+  width:30%;
+  height:300px;
+}
+
+.three img{
+  width:20%;
+  height:300px;
+}
+
+.four img{
+  width:15%;
+  height:300px;
+}
+
+
+
+
+
+.index_right video{
+  border-radius: 10px;
+  border: solid 3px rgb(218, 217, 217);
+}
+
+.index_right video:hover{
+  opacity:0.8;
+}
+
+.one video{
+  width:60%;
+  height:300px;
+}
+
+.two video{
+  width:30%;
+  height:300px;
+}
+
+.three video{
+  width:20%;
+  height:300px;
+}
+
+.four video{
+  width:15%;
+  height:300px;
+}
+
+
 
 
 .index_right iframe{
-  width:300px;
-  height:200px;
-  margin:25px;
+  width:60%;
+  height:300px;
+ 
+  border-radius: 10px;
+  border: solid 3px rgb(218, 217, 217);
+}
+
+.index_right iframe:hover{
+  opacity:0.8;
+}
+
+.index_right_file_url a{
+  color:rgb(25, 116, 252);
+}
+
+.index_right_file_url :hover{
+  opacity:0.6;
 }
 
 

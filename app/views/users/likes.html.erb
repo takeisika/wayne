@@ -9,11 +9,15 @@
         <%end%>
 
         <p class="user_show_name"><%=@user.name%></p>
+
+
+        <p class="user_show_introduction"><%=@user.introduction%></p>
         
       </div>
 
 
 
+        <%if @current_user%>
         <%if @current_user.id==@user.id%>
           <p>
             <span class="user_show_profile_edit"><%=link_to("プロフィールを編集","/users/#{@user.id}/edit")%></span>
@@ -25,6 +29,7 @@
           <%= link_to("/talks/#{@user.id}",method: :post) do %>
           <i class="fas fa-envelope-square fa-2x"></i></span>
           <% end %>
+        <%end%>
         <%end%>
 
 
@@ -52,9 +57,11 @@
   <div class="container">
         <%@likes.each do |like|%>
           <%@post=Post.find_by(id: like.post_id)%>
+          <%if @post%>
           <%= link_to("/posts/#{@post.id}/comment",class: "link")do %>
+          
            <div class="index">
-             <%if @post%>
+             
 
               <%@user=User.find_by(id:@post.user_id)%>
                <div class="index_left">
@@ -90,29 +97,76 @@
                   </div>
 
 
-                  <%if @post.tube?%>
-                    <%@post_tube=@post.tube%>
-                    <%@post_tube=@post_tube.last(11)%>
-                    <object><iframe src="https://www.youtube.com/embed/<%=@post_tube%>" type="video/mp4" controls></iframe></object>
-                  <%end%>
+                  <div class="index_right_file">
+       
 
-                  <%if @post.files.attached?%>
-                    <% @post.files.each do |file| %>
-                      <object><%= link_to image_tag(file),file, :rel => "lightbox" %></object>
-                    <%end%>
-                  <%end%>
+       <%if @post.files.attached?%>
+       <%if @post.files.count==1 %>
+       <% @post.files.each do |file| %>
+          <object class="one"><%= link_to image_tag(file),file, :rel => "lightbox" %></object>
+       <%end%>
+       <%end%>
+       <%if @post.files.count==2 %>
+       <% @post.files.each do |file| %>
+          <object class="two"><%= link_to image_tag(file),file, :rel => "lightbox" %></object>
+       <%end%>
+       <%end%>
+       <%if @post.files.count==3 %>
+       <% @post.files.each do |file| %>
+          <object class="three"><%= link_to image_tag(file),file, :rel => "lightbox" %></object>
+       <%end%>
+       <%end%>
+       <%if @post.files.count==4 %>
+       <% @post.files.each do |file| %>
+          <object class="four"><%= link_to image_tag(file),file, :rel => "lightbox" %></object>
+       <%end%>
+       <%end%>
+       <%end%>
 
-                  <%if @post.movies.attached?%>
-                   <% @post.movies.each do |movie| %>
-                   <video src="<%= rails_blob_path(movie) %>" type="video/mp4" controls></video>
-                  <%end%>
-                  
-                  <%end%>
 
+       <%if @post.movies.attached?%>
+       <%if @post.movies.count==1 %>
+       <% @post.movies.each do |movie| %>
+          <object class="one"><video src="<%= rails_blob_path(movie) %>" type="video/mp4" controls></video></object>
+       <%end%>
+       <%end%>
+       <%if @post.movies.count==2 %>
+       <% @post.movies.each do |movie| %>
+          <object class="two"><video src="<%= rails_blob_path(movie) %>" type="video/mp4" controls></video></object>
+       <%end%>
+       <%end%>
+       <%if @post.movies.count==3 %>
+       <% @post.movies.each do |movie| %>
+          <object class="three"><video src="<%= rails_blob_path(movie) %>" type="video/mp4" controls></video></object>
+       <%end%>
+       <%end%>
+       <%if @post.movies.count==4 %>
+       <% @post.movies.each do |movie| %>
+          <object class="four"><video src="<%= rails_blob_path(movie) %>" type="video/mp4" controls></video></object>
+       <%end%>
+       <%end%>
+       <%end%>
+
+
+       <%if @post.tube?%>
+       <%@post_tube=@post.tube%>
+       <%@post_tube=@post_tube.last(11)%>
+       <object><iframe src="https://www.youtube.com/embed/<%=@post_tube%>" type="video/mp4" controls></iframe></object>
+       <object class="index_right_file_url"><p><%=link_to("https://youtu.be/#{@post_tube}","https://youtu.be/#{@post_tube}")%></p></object>
+       <%end%>
+
+
+
+
+
+
+
+       </div>
 
                 </div>
-            <%end%>
+           
            </div>
+          <%end%>
           <%end%>
         <%end%>
     </div>

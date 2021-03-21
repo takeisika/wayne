@@ -2,6 +2,7 @@ Rails.application.routes.draw do
  
 
   
+  
   post "talks/:your_id/create"=>"talks#create"
   get "talks/:your_id"=>"talks#show"
 

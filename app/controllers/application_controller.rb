@@ -24,4 +24,5 @@ before_action:set_current_user
             redirect_to("/posts/index")
         end
     end
+
 end

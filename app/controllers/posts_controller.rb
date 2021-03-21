@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action:ensuring,{only:[:edit,:update,:destroy,:comment,:show]}
+  before_action:ensuring,{only:[:edit,:update,:destroy,:come]}
   before_action:postensure,{only:[:edit,:update,:destroy]}
 
   def index
@@ -10,15 +10,23 @@ class PostsController < ApplicationController
     @post=Post.new
   end
 
+
   def create
     @post=Post.new(post_params)
-    if @post.save
-      redirect_to("/posts/index")
-    else
-      render("posts/_form")
-    end
+
+    @post.save
+
+
+      if @post.files.count>4
+        @post.destroy
+        render("posts/_form")
+      else
+        redirect_to("/posts/index")
+      end
+
   end
 
+  
   def show
     @post=Post.find_by(id: params[:id])
   end
@@ -40,11 +48,12 @@ class PostsController < ApplicationController
 
   def destroy
     @post=Post.find_by(id: params[:id])
+    @post_id=@post.id
     @post.destroy
     @likes=Like.where(post_id: params[:id],user_id: @current_user.id)
     @likes.destroy_all
-    flash[:notice]="削除完了"
-    redirect_to("/posts/index")
+    flash.now[:notice]="削除完了"
+    
   end
 
   def postensure

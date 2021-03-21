@@ -16,3 +16,11 @@
  a{
     text-decoration: none;
  }
+
+
+ .flash{
+    
+    font-weight: bold;
+    color:rgb(252, 178, 40);
+    background-color: rgb(255, 251, 217);
+ }

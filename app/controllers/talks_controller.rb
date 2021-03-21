@@ -1,16 +1,15 @@
 class TalksController < ApplicationController
+  before_action:ensuring
   before_action:talk_ensure
 
   def show
     @user=User.find_by(id:params[:your_id])
-    @talks=Talk.all
   end
 
   def create
+    @user=User.find_by(id:params[:your_id])
     @talk=Talk.new(content:params[:content],my_id:@current_user.id,your_id:params[:your_id])
-    if @talk.save
-      redirect_to("/talks/#{@talk.your_id}")
-    end
+    @talk.save        
   end
 
 

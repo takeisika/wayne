@@ -15,8 +15,9 @@
 
 
     <% @tasuku=Post.find_by(id: rank.first) %>
+    <%if @tasuku%>
     <% @user=User.find_by(id: @tasuku.user_id)%>
-     <%if @tasuku%>
+     
 
       
 

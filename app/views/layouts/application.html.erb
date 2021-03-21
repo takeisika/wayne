@@ -31,9 +31,13 @@
    <%=link_to("このアプリについて","/home/about")%>
    <%end%>
    </div>
+
+   <div class="flash">
    <%if flash[:notice]%>
    <%=flash[:notice]%>
    <%end%>
+   </div>
+   
     <%= yield %>
   </body>
 </html>

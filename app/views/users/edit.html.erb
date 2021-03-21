@@ -8,6 +8,8 @@
 <%= form_with model:@user,local:true do |form| %>
 <p>ユーザー名</p>
 <%= form.text_field :name %>
+<p>自己紹介</p>
+<%= form.text_area :introduction %>
 <p>画像</p>
 <%= form.file_field :avator %>
 <%= form.submit %>
