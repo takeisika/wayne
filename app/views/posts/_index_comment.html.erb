@@ -1,0 +1,45 @@
+<% @comments=Comment.where(comment_id: post.id)%>
+    <%if @comments%>
+      <%@comments.each do |comment|%>
+<% @user=User.find_by(id: comment.user_id) %>
+<div class="index_comment_name_content_edit">
+
+   <div class="index_comment_name_content">
+
+     <%if @user.avator.attached?%>
+      <%=image_tag @user.avator%>
+     <%else%>
+      <%=image_tag "/default.jpg"%>
+     <%end%>
+
+    <span class="index_comment_name"><%=link_to(@user.name,"/users/#{@user.id}")%></span>
+    
+
+     <%if @current_user&&@current_user.id==comment.user_id%>
+       <%=link_to(comment.content,"/comments/#{comment.id}/edit") %>
+     <%else%>
+     <span class="index_comment_content"><%=comment.content%></span>
+     <%end%>
+
+     
+   </div>
+
+   <%if @current_user%>
+   <%if @current_user.id==@user.id%>
+   <div class="index_comment_edit_delete">
+       <%=link_to("編集","/comments/#{comment.id}/edit")%>
+       <%=link_to("削除","/comments/#{comment.id}/destroy",method: :post,remote: true)%>
+   </div>
+   <%end%>
+   <%end%>
+</div>
+<%end%>
+<%end%>
+
+
+<div class="comment_button_text_area">
+<%=form_tag("/posts/#{post.id}/come",method: :post,remote: true)do%>
+<input type="text" name="content" class="comment_text_area" placeholder="コメントしよう！">
+<input type="submit" value="&#xf3e5" class="comment_toukou_button fas fa-lg">
+</div>
+<%end%>

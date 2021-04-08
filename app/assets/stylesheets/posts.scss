@@ -12,7 +12,7 @@
 }
 
 .fas{
-  color:rgb(143, 236, 143);
+  color:rgb(194, 194, 194);
   margin-left:5px;
 }
 
@@ -27,8 +27,8 @@
 .container{
   padding-top:100px;
   padding-bottom: 100px;
-  padding-left: 200px;
-  padding-right: 200px;
+  padding-left: 250px;
+  padding-right: 250px;
 }
 
 .index {
@@ -106,10 +106,10 @@
 }
 
 
-
-.index_comment{
-  margin-top:15px;
+.comment_index{
+  margin-bottom: 15px;
 }
+
 
 .index_comment_name_content{
   margin-top:1px;
@@ -143,6 +143,14 @@
 
 
 
+
+
+
+
+
+
+
+
 .comment_button_text_area{
   margin-top:15px;
 }
@@ -152,25 +160,35 @@
 .comment_button_text_area form{
   display:flex;
   justify-content: space-between;
+  border-radius: 20px;
+  padding:10px;
+  border: solid 3px rgb(172, 172, 172);
 }
 
 
 .comment_text_area{
-  width:90%;
+  width:94%;
+  border: none;
 }
 
+.comment_text_area:focus {
+  outline: none;
+}
 
 .comment_toukou_button{
-  color:white;
-  background-color: rgb(9, 95, 224);
-  padding:0; 
-  width:10%;
+  border-radius: 20px;
+  border: none;
+  background-color: white;
+  color: rgb(59, 124, 245);
 }
 
 .comment_toukou_button:hover{
   opacity:0.6;
 }
 
+.comment_toukou_button:focus {
+  outline: none;
+}
 
 
 
@@ -192,8 +210,9 @@
 table {
   border-collapse: collapse;
   text-align:center;
-  width:30%;
+  width:28%;
   margin: 0 auto;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 table a:hover{
@@ -201,7 +220,7 @@ table a:hover{
 }
 
 table th, table td {
-  border: solid 1px black;
+  border: solid 1px rgb(172, 168, 153);
   /*実線 1px 黒*/
 }
 
@@ -210,11 +229,22 @@ table {
 }
 
 table th{
+  font-weight: normal;
   background-color: rgb(214, 197, 101);
+  font-size:15px;
+  padding:0;
+  color:rgb(0, 0, 0);
 }
 
 .ran{
   text-align:center;
+}
+
+.rank_header_letter{
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size:25px;
+  color:rgb(153, 153, 153);
+  margin-bottom:10px;
 }
 
 .hyou{
@@ -225,14 +255,21 @@ table th{
   color:blue;
 }
 
-.hyou_span span{
+.rank_title{
   font-weight: bold;
 }
 
-.ran h3{
-  margin-top:60px;
+.rank_user_name{
+  font-size: 13px;
 }
 
+td{
+  padding:5px;
+}
+
+#ranking_render{
+  margin-top:120px;
+}
 
 
 
@@ -255,6 +292,7 @@ table th{
   border-radius: 10px;
   border: solid 3px rgb(218, 217, 217);
   margin-top:30px;
+  margin-bottom:35px;
 }
 
 .index_right img:hover{
@@ -289,6 +327,7 @@ table th{
   border-radius: 10px;
   border: solid 3px rgb(218, 217, 217);
   margin-top:30px;
+  margin-bottom:35px;
 }
 
 .index_right video:hover{
@@ -352,4 +391,63 @@ table th{
 
 .form_button input:hover{
   opacity:0.7;
+}
+
+
+
+.tag a{
+  color:rgb(0, 119, 255);
+}
+
+.tag:hover{
+  opacity:0.6;
+}
+
+
+
+
+.search_form{
+  text-align:center;
+  margin-top:70px;
+}
+.search_form_text{
+  width:15%;
+}
+
+.search_form_text::placeholder {
+  text-align: center;
+}
+
+.search_form_nil{
+  text-align:center;
+}
+
+
+
+
+
+
+//投稿ページ
+
+.post_toukou form{
+  margin-top:70px;
+}
+
+
+
+
+
+
+
+
+
+
+.search_form_container{
+  padding-top:20px;
+}
+
+.index_setu mark{
+  background-color:white;
+  color:#015ac0;
+  font-weight: bold;
 }

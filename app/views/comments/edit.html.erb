@@ -1,6 +1,6 @@
 <%=form_tag("/comments/#{@comment.id}/update")do%>
-<textarea name="commentupdate"><%=@comment.content%></textarea>
-<input type="submit" value="編集完了">
+<textarea name="commentupdate" class="comment_edit_edit"><%=@comment.content%></textarea>
+<p><input type="submit" value="編集完了"></p>
 <%end%>
 
-<%=link_to("削除","/comments/#{@comment.id}/destroy",{method: "post"})%>
+

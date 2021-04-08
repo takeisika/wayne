@@ -1,6 +1,6 @@
-<div class="container">
+<div class="comment_container">
 <%@user=User.find_by(id:@post.user_id)%>
-<div class="index">
+<div class="index comment_index">
     <%if @user%>
 
       <div class="index_left">
@@ -8,9 +8,19 @@
        <%if @user.avator.attached?%>
        <object><%= link_to image_tag(@user.avator),@user.avator, :rel => "lightbox" %></object>
        <%else%>
-       <object><a href="/user_images/default.jpg" data-lightbox="group"><%=image_tag "/user_images/default.jpg"%></a></object>
+       <object><a href="/default.jpg" data-lightbox="group"><%=image_tag "/default.jpg"%></a></object>
        <%end%>
        </div>
+       <div class="index_likes_comments">
+         <object><div id="likes_buttons_<%= @post.id %>">
+          <%= render partial: 'like', locals: { post: @post} %>
+         </div></object>
+         <div class="index_comments">
+          <object><div id="comments_buttons_<%= @post.id %>">
+            <%= render partial: 'comment', locals: { post: @post} %>
+          </div></object>          
+         </div>
+        </div>
       </div>
       
       <div class="index_right">
@@ -36,6 +46,17 @@
        <div class="index_setu">
         <%=link_to(@post.content,"/posts/#{@post.id}/comment")%>
        </div>
+
+
+       <% if @post.tag%>
+       <%@hashtags=@post.tag.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)%>
+         <%@hashtags.uniq.map do |hashtag|%>
+            <%@tag = Hashtag.find_or_create_by(hashname: hashtag, post_id: @post.id)%>
+            <%@tag.save%>
+            <%@hash=Hashtag.find_by(hashname: hashtag)%>
+            <object class="tag"><%=link_to(@hash.hashname,"/hashtags/#{@hash.id}")%></object>
+         <%end%>
+         <%end%>       
 
 
        <div class="index_right_file">
@@ -126,7 +147,7 @@
       <%if @current_user%>
         <%if @current_user.id==@post.user_id%>
          <%=link_to("編集","/posts/#{@post.id}/edit")%>
-         <%=link_to("削除","/posts/#{@post.id}/destroy",{method: "post"})%>
+         <%=link_to("削除","/posts/#{@post.id}/destroy_at_comment",{method: "post"})%>
         <%end%>
       <%end%>
         </div>
@@ -142,43 +163,15 @@
 
 
 
-<div class="index_comment">
-       <% @comments=Comment.where(comment_id: @post.id)%>
-       <%if @comments%>
-        <%@comments.each do |comment|%>
-          <% @user=User.find_by(id: comment.user_id) %>
 
-            <div class="index_comment_name_content">
 
-              <%if @user.avator.attached?%>
-               <%=image_tag @user.avator%>
-              <%else%>
-               <%=image_tag "/user_images/default.jpg"%>
-              <%end%>
+         <div class="index_comment">
+            <%= render partial: 'index_comment', locals: { post: @post} %>
+         </div>
 
-             <span class="index_comment_name"><%=link_to(@user.name,"/users/#{@user.id}")%></span>
-             
-             
-              <%if @current_user.id==comment.user_id%>
-                <%=link_to(comment.content,"/comments/#{comment.id}/edit") %>
-              <%else%>
-              <span class="index_comment_content"><%=comment.content%></span>
-              <%end%>
-              
-            </div>
-            
-        <%end%>
-       <%end%>
             
 
-<div class="comment_button_text_area">
-<%=form_tag("/posts/#{@post.id}/come")do%>
-<input type="text" name="content" class="comment_text_area" value="コメントしよう">
-<input type="submit" value="送信" class="comment_toukou_button">
-</div>
-<%end%>
+
+
     
-</div>
-
-
 

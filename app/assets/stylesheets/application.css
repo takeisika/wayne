@@ -13,14 +13,129 @@
  *= require_tree .
  *= require_self
  */
+
+
+
+
+
+body{
+   margin:0;
+}
+
+
+.title_insp{
+   color:rgb(255, 255, 255);
+   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+   opacity:1;
+   font-size:30px;
+   margin:0;
+   padding-left:80px;
+   padding-top:5px;
+   padding-bottom:5px;
+   line-height: 50px;
+}
+
+
+
+
  a{
     text-decoration: none;
  }
 
 
- .flash{
-    
-    font-weight: bold;
-    color:rgb(252, 178, 40);
-    background-color: rgb(255, 251, 217);
+ .flash_letter{  
+    color:white;
+    background-color: rgb(255, 155, 61);
+    text-align:center;
+    margin:0;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding:9px;
+    font-size:14px;
  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.header{
+   background-color: rgb(37, 78, 126);
+   opacity:0.9;
+   width:25%;
+   position: fixed;
+   /*基準を画面の左上に*/
+   top: 0;
+   /*余白が入らないように*/
+   margin: 0;
+   width:100%;
+
+}
+
+
+
+
+.header_menu{
+    display:flex;
+    justify-content:space-between;
+}
+
+
+
+
+
+
+.menu_button a{
+    color:white;
+    line-height: 50px;
+    padding-top:5px;
+    padding-right:20px;
+}
+
+.menu_button a:hover{
+    opacity:0.8;
+}
+
+.menu_button a:active{
+    color:black;
+}
+
+.menu_button span{
+    padding-right:40px;
+}
+
+
+
+
+
+.menu_button_else{
+    padding-top: 4px;
+}
+
+.menu_button_else a{
+    color:white;
+    line-height: 50px;
+    padding-right:20px;
+    font-weight:bold;
+}
+
+.menu_button_else a:hover{
+    opacity:0.8;
+}
+
+.menu_button_else a:active{
+    color:black;
+}
+
+.menu_button_else span{
+    padding-right:40px;
+}

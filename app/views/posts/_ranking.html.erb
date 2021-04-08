@@ -1,5 +1,5 @@
 <div class="ran">
-    <h3>👑人気ランキング👑</h3>
+    <p class="rank_header_letter">🥇人気投稿🥇</p>
     </div>
     <table>
     <tr>
@@ -7,6 +7,7 @@
     </tr>
 
 
+    
 
     
 <%@ranks=Like.group(:post_id).order('count_post_id DESC').limit(5).count(:post_id)%>
@@ -37,7 +38,7 @@
         <td><%= @j %>位</td>
         <%end%>
         
-        <td class="hyou_span"><span><%=link_to(@user.name,"/users/#{@user.id}")%></span>さん：<%=link_to(@tasuku.title,"/posts/#{rank.first}/comment")%></td>
+        <td class="hyou_span"><span class="rank_title"><%=link_to(@tasuku.title,"/posts/#{rank.first}/comment")%></span><span class="rank_user_name">（<%=link_to(@user.name,"/users/#{@user.id}")%>さん）</span></td>
         <td><%=rank.second%></td>
 
 
@@ -45,7 +46,7 @@
 
       <%else%>
         <td><%= @j=i + 1 %>位</td>
-        <td class="hyou_span"><span><%=link_to(@user.name,"/users/#{@user.id}")%></span>さん：<%=link_to(@tasuku.title,"/posts/#{rank.first}/comment")%></td>
+        <td class="hyou_span"><span class="rank_title"><%=link_to(@tasuku.title,"/posts/#{rank.first}/comment")%></span><span class="rank_user_name">（<%=link_to(@user.name,"/users/#{@user.id}")%>さん)</span></td>
         <td><%=rank.second%></td>
       <%end%>
        

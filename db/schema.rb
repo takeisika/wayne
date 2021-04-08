@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_18_075146) do
+ActiveRecord::Schema.define(version: 2021_03_24_145435) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -41,6 +41,20 @@ ActiveRecord::Schema.define(version: 2021_03_18_075146) do
     t.integer "user_id"
   end
 
+  create_table "follows", force: :cascade do |t|
+    t.integer "following_id"
+    t.integer "followed_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "hashtags", force: :cascade do |t|
+    t.string "hashname"
+    t.integer "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "likes", force: :cascade do |t|
     t.integer "user_id"
     t.integer "post_id"
@@ -55,6 +69,7 @@ ActiveRecord::Schema.define(version: 2021_03_18_075146) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "tube"
+    t.string "tag"
   end
 
   create_table "talks", force: :cascade do |t|

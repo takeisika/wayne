@@ -2,27 +2,36 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
 .talk{
-    width:50%;
+    width:70%;
     margin:0 auto;
-    background-color:rgb(243, 243, 243);
+    background-color:white;
     border: solid 1px rgb(170, 170, 170);
     margin-top:100px;
-    
+    height:500px;
+    position: relative;
 }
+
+
 
 .talk_header{
     text-align:center;
 }
 
 .talk_header_name{
-    background-color:rgb(83, 114, 248);
+    background-color:rgb(78, 134, 255);
     padding:15px;
     font-weight:bold;
     color:rgb(236, 233, 233);
     margin-top:0;
 }
 
+
+.talk_zone{
+    overflow:scroll;
+    height:70%;
+}
 
 .talk img {
     width:30px;
@@ -46,10 +55,9 @@
 
 
 .talk_submit_user_content{
-    border: solid 1px black;
-    background-color:rgb(214, 211, 211);
-    padding:5px;
-    border-radius: 10px;
+    background-color:rgb(233, 233, 233);
+    padding:10px;
+    border-radius: 18px;
     margin-right:20px;
     margin-left:10px;
     display: inline-block;
@@ -61,10 +69,9 @@
 
 
 .talk_receive_user_content{
-    border: solid 1px black;
-    background-color:white;
-    padding:5px;
-    border-radius: 10px;
+    border: solid 1px rgb(197, 197, 197);
+    padding:8px;
+    border-radius: 18px;
     margin-right:10px;
     margin-left:10px;
     display: inline-block;
@@ -73,20 +80,11 @@
 }
 
 
-.talk form{
-    display:flex;
-    justify-content: space-between;
-}
 
-form textarea{
-    width:90%;
-}
 
-.talk input{
-    width:10%;
-    background-color:rgb(134, 230, 134);
-}
-
-.talk input:hover{
-    opacity:0.7;
+.comment_button_text_area_message{
+    position: absolute;
+    bottom: 0;
+    margin:15px;
+    width:96%;
 }

@@ -51,10 +51,10 @@ class UsersController < ApplicationController
     @user=User.find_by(name: params[:username],password: params[:password])
     if @user
       session[:user_id] =@user.id
-      redirect_to("/")
-      flash[:notice]="ログインしました。"
+      redirect_to("/follows/index")
+      flash[:notice]="ログインしました"
     else
-      @error_message="ユーザー名またはパスワードが間違っています"
+      flash.now[:notice]="ユーザー名またはパスワードが間違っています"
       @username=params[:username]
       @password=params[:password]
       render("users/login_form")
@@ -63,8 +63,33 @@ class UsersController < ApplicationController
 
   def logout
     session[:user_id]=nil
+    flash[:notice]="ログアウトしました"
     redirect_to("/users/login_form")
   end
+
+  def guest_form
+    @user=User.new
+  end
+
+
+  def guest
+    if User.find_by(name:"guest")
+      @user=User.find_by(name: "guest")
+      session[:user_id] =@user.id
+      redirect_to("/users/#{@user.id}")
+      flash[:notice]="ゲストユーザーとしてログインしました"
+    else
+      @user=User.new(name: "guest",password: SecureRandom.urlsafe_base64)
+      @user.save
+      session[:user_id] =@user.id
+      redirect_to("/users/#{@user.id}")
+      flash[:notice]="ゲストユーザーとしてログインしました"
+    end
+  end
+
+
+
+
 
   private
   def user_params

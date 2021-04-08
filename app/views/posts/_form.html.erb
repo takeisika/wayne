@@ -1,3 +1,7 @@
+<h1>⚠️⚠️⚠️デザイン工事中⚠️⚠️⚠️⚠</h1>
+<h1>⚠️⚠️⚠️デザイン工事中⚠️⚠️⚠️⚠</h1>
+<h1>⚠️⚠️⚠️デザイン工事中⚠️⚠️⚠️⚠</h1>
+
 
 <% @post.errors.full_messages.each do |message| %>
     <div class="form-error">
@@ -6,7 +10,7 @@
   <% end %>
 
 
-
+<div class="post_toukou">
 <%= form_with model:@post,local:true do |form| %>
   <p>タイトル</p>
   <%= form.text_field :title %>
@@ -18,8 +22,14 @@
   <%= form.file_field :movies,multiple: true %>
   <p>URL(Youtube)</p>
   <%= form.text_field :tube %>
+  <p>タグ</p>
+  <%= form.text_field :tag %>
 
   <div class="form_button">
     <%= form.submit "投稿する"%>
   </div>
   <%end%>
+  </div>
+
+
+

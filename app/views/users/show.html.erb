@@ -1,9 +1,16 @@
+
+
+
+
+
+
+
 <div class="user_show">
      <div class="user_show_top">
         <%if @user.avator.attached?%>
           <object><%= link_to image_tag(@user.avator),@user.avator, :rel => "lightbox" %></object>
         <%else%>
-          <object><a href="/user_images/default.jpg" data-lightbox="group"><%=image_tag "/user_images/default.jpg"%></a></object>
+          <object><a href="/default.jpg" data-lightbox="group"><%=image_tag "/default.jpg"%></a></object>
         <%end%>
 
         <p class="user_show_name"><%=@user.name%></p>
@@ -35,6 +42,14 @@
                <i class="fas fa-envelope-square fa-2x"></i></span>
              <% end %>
         <%end%>
+        
+
+
+        <div class="user_show_follow_button">
+         <%= render partial: 'follow' , locals: {user: @user}%>
+        </div>
+
+        
 
 
 
@@ -48,141 +63,160 @@
 
 
 
+
+
 <%@posts=Post.where(user_id: @user.id)%>
+<%@posts = @posts.sort_by{|post| post.created_at}.reverse%>
 <%if @posts.count >= 1%>
   <div class="container">
-        <% @posts.each do |post| %>
-          <%@user=User.find_by(id:post.user_id)%>
-          <%= link_to("/posts/#{post.id}/comment",class: "link")do %>
-           <div class="index">
-             <%if @user%>
-
-               <div class="index_left">
-                 <div class="index_gazo">
-                  <%if @user.avator.attached?%>
-                   <object><%= link_to("/users/#{@user.id}")do %>
-                   <%=image_tag @user.avator%>
-                   <%end%></object>
-                  <%else%>
-                   <object><%= link_to("/users/#{@user.id}")do %>
-                   <%=image_tag "/user_images/default.jpg"%>
-                   <%end%></object>
-                  <%end%>
-                 </div>
-                 <div class="index_likes_comments">
-                   <object><div id="likes_buttons_<%= post.id %>">
-                     <%= render partial: 'posts/like', locals: { post: post} %>
-                   </div></object>
-                   <div class="index_comments">
-                     <object><%= link_to("/posts/#{post.id}/comment",class: "link")do %>
-                     <span class="fas fa-comment fa-xs"><%=Comment.where(comment_id: post.id).count%></span>
-                     <%end%></object>
-                   </div>
-                 </div>
-               </div>
-      
-                <div class="index_right">
-                  <div class="index_header">
-                    <object><%=link_to(@user.name,"/users/#{@user.id}")%></object>
-                    <p><%= post.updated_at.to_s(:datetime_jp) %></p>
-                  </div>
-                  <div class="index_title">
-                    <%=post.title%>
-                  </div>
-                  <div class="index_setu">
-                    <%=post.content%>
-                  </div>
-
-
-                  <div class="index_right_file">
-       
-
-       <%if post.files.attached?%>
-       <%if post.files.count==1 %>
-       <% post.files.each do |file| %>
-          <object class="one"><%= link_to image_tag(file),file, :rel => "lightbox" %></object>
-       <%end%>
-       <%end%>
-       <%if post.files.count==2 %>
-       <% post.files.each do |file| %>
-          <object class="two"><%= link_to image_tag(file),file, :rel => "lightbox" %></object>
-       <%end%>
-       <%end%>
-       <%if post.files.count==3 %>
-       <% post.files.each do |file| %>
-          <object class="three"><%= link_to image_tag(file),file, :rel => "lightbox" %></object>
-       <%end%>
-       <%end%>
-       <%if post.files.count==4 %>
-       <% post.files.each do |file| %>
-          <object class="four"><%= link_to image_tag(file),file, :rel => "lightbox" %></object>
-       <%end%>
-       <%end%>
-       <%end%>
-
-
-       <%if post.movies.attached?%>
-       <%if post.movies.count==1 %>
-       <% post.movies.each do |movie| %>
-          <object class="one"><video src="<%= rails_blob_path(movie) %>" type="video/mp4" controls></video></object>
-       <%end%>
-       <%end%>
-       <%if post.movies.count==2 %>
-       <% post.movies.each do |movie| %>
-          <object class="two"><video src="<%= rails_blob_path(movie) %>" type="video/mp4" controls></video></object>
-       <%end%>
-       <%end%>
-       <%if post.movies.count==3 %>
-       <% post.movies.each do |movie| %>
-          <object class="three"><video src="<%= rails_blob_path(movie) %>" type="video/mp4" controls></video></object>
-       <%end%>
-       <%end%>
-       <%if post.movies.count==4 %>
-       <% post.movies.each do |movie| %>
-          <object class="four"><video src="<%= rails_blob_path(movie) %>" type="video/mp4" controls></video></object>
-       <%end%>
-       <%end%>
-       <%end%>
-
-
-       <%if post.tube?%>
-       <%@post_tube=post.tube%>
-       <%@post_tube=@post_tube.last(11)%>
-       <object><iframe src="https://www.youtube.com/embed/<%=@post_tube%>" type="video/mp4" controls></iframe></object>
-       <object class="index_right_file_url"><p><%=link_to("https://youtu.be/#{@post_tube}","https://youtu.be/#{@post_tube}")%></p></object>
-       <%end%>
-
-
-
-
-
-
-
+  <% @posts.each do |post| %>
+    <%@user=User.find_by(id:post.user_id)%>
+    <%if @user%>
+    <div class="index_<%=post.id%>">
+     <%= link_to("/posts/#{post.id}/comment",class: "link")do %>
+      <div class="index">
+      <div class="index_right_left">
+       <div class="index_left">
+        <div class="index_gazo">
+         <%if @user.avator.attached?%>
+         <object><%= link_to image_tag(@user.avator),@user.avator, :rel => "lightbox" %></object>
+         <%else%>
+         <object><a href="/default.jpg" data-lightbox="group"><%=image_tag "/default.jpg"%></a></object>
+         <%end%>
+        </div>
+         <div class="index_likes_comments">
+          <object><div id="likes_buttons_<%= post.id %>">
+           <%= render partial: 'posts/like', locals: { post: post} %>
+          </div></object>
+          <div class="index_comments">
+           
+            <span class="fas fa-comment fa-xs"><%=Comment.where(comment_id: post.id).count%></span>
+           
+          </div>
+         </div>
        </div>
-
-
-
-                  </div>
-
-
-                  <div class="comment_edit">
-                   <%if @current_user%>
-                    <%if @current_user.id==post.user_id%>
-                     <object><%=link_to("編集","/posts/#{post.id}/edit")%></object>
-                     <object><%=link_to("削除","/posts/#{post.id}/destroy",{method: "post"})%></object>
-                    <%end%>
-                   <%end%>
-                  </div>
-
+  
+       
+       <div class="index_right">
+        <div class="index_header">
+        <object><%=link_to(@user.name,"/users/#{@user.id}")%></object>
+         <p><%= post.updated_at.to_s(:datetime_jp) %></p>
+        </div>
+       
+     
      
 
+ 
+        <div class="index_title">
+         <%=post.title%>
+        </div>
+        <div class="index_setu">
+        <p><%=post.content%></p>
 
 
-                
-            <%end%>
-           </div>
+
+
+         <% if post.tag%>
+         <%@hashtags=post.tag.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)%>
+           <%@hashtags.uniq.map do |hashtag|%>
+              <%@tag = Hashtag.find_or_create_by(hashname: hashtag, post_id: post.id)%>
+              <%@tag.save%>
+              <%@hash=Hashtag.find_by(hashname: hashtag)%>
+              <object class="tag"><%=link_to(@hash.hashname,"/hashtags/#{@hash.id}")%></object>
            <%end%>
+           <%end%>            
+        </div>
+        
+        
+ 
+ 
+        <div class="index_right_file">
+        
+ 
+        <%if post.files.attached?%>
+        <%if post.files.count==1 %>
+        <% post.files.each do |file| %>
+           <object class="one"><%= link_to image_tag(file),file, :rel => "lightbox" %></object>
         <%end%>
+        <%end%>
+        <%if post.files.count==2 %>
+        <% post.files.each do |file| %>
+           <object class="two"><%= link_to image_tag(file),file, :rel => "lightbox" %></object>
+        <%end%>
+        <%end%>
+        <%if post.files.count==3 %>
+        <% post.files.each do |file| %>
+           <object class="three"><%= link_to image_tag(file),file, :rel => "lightbox" %></object>
+        <%end%>
+        <%end%>
+        <%if post.files.count==4 %>
+        <% post.files.each do |file| %>
+           <object class="four"><%= link_to image_tag(file),file, :rel => "lightbox" %></object>
+        <%end%>
+        <%end%>
+        <%end%>
+ 
+ 
+        <%if post.movies.attached?%>
+        <%if post.movies.count==1 %>
+        <% post.movies.each do |movie| %>
+           <object class="one"><video src="<%= rails_blob_path(movie) %>" type="video/mp4" controls></video></object>
+        <%end%>
+        <%end%>
+        <%if post.movies.count==2 %>
+        <% post.movies.each do |movie| %>
+           <object class="two"><video src="<%= rails_blob_path(movie) %>" type="video/mp4" controls></video></object>
+        <%end%>
+        <%end%>
+        <%if post.movies.count==3 %>
+        <% post.movies.each do |movie| %>
+           <object class="three"><video src="<%= rails_blob_path(movie) %>" type="video/mp4" controls></video></object>
+        <%end%>
+        <%end%>
+        <%if post.movies.count==4 %>
+        <% post.movies.each do |movie| %>
+           <object class="four"><video src="<%= rails_blob_path(movie) %>" type="video/mp4" controls></video></object>
+        <%end%>
+        <%end%>
+        <%end%>
+ 
+ 
+        <%if post.tube?%>
+        <%@post_tube=post.tube%>
+        <%@post_tube=@post_tube.last(11)%>
+        <object><iframe src="https://www.youtube.com/embed/<%=@post_tube%>" type="video/mp4" controls></iframe></object>
+        <object class="index_right_file_url"><p><%=link_to("https://youtu.be/#{@post_tube}","https://youtu.be/#{@post_tube}")%></p></object>
+        <%end%>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+        </div>
+        </div>
+        </div>
+       
+ 
+       
+       <div class="comment_edit">
+       <%if @current_user%>
+       <%if @current_user.id==post.user_id%>
+         <object><%=link_to("編集","/posts/#{post.id}/edit")%></object>
+         <object><%=link_to("削除","/posts/#{post.id}/destroy",method: :post,remote: true)%></object>
+        <%end%>
+        <%end%>
+      </div>
+      
+ 
+       
+ 
+   </div>
+   <%end%>
+   </div>
+   <%end%>
+ <%end%>
     </div>
 
 <%else%>

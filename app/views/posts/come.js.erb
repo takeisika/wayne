@@ -1,0 +1,4 @@
+$('.index_comment').html("<%= j(render partial: 'index_comment', locals: {post: @post}) %>");
+
+
+$('#comments_buttons_<%= @post.id %>').html("<%= j(render partial: 'comment', locals: {post: @post}) %>");

@@ -1,9 +1,12 @@
-<div class="talk">
+<div class="talk" >
+
 
  <div class="talk_header">
   <p class="talk_header_name"><%=user.name%></p>
  </div>
 
+
+ <div class="talk_zone">
  <%@talks=Talk.all%>
 
 <%@talks.each do |talk|%>
@@ -11,6 +14,7 @@
     <%@submit_user=User.find_by(id: talk.my_id)%>
 
      <%if @submit_user.id==@current_user.id%>
+     
       <div class="talk_submit_user">
        <p class="talk_submit_user_content">
          <%=talk.content%>
@@ -22,7 +26,7 @@
          <%if user.avator.attached?%>
            <object><%= link_to image_tag(user.avator),user.avator, :rel => "lightbox" %></object>
          <%else%>
-           <object><a href="/user_images/default.jpg" data-lightbox="group"><%=image_tag "/user_images/default.jpg"%></a></object>
+           <object><a href="/default.jpg" data-lightbox="group"><%=image_tag "/default.jpg"%></a></object>
          <%end%>
 
         
@@ -35,21 +39,25 @@
 
     <%end%>
 <%end%>
+</div>
 
 
-
-
+<div class="comment_button_text_area comment_button_text_area_message">
   <%=form_tag("/talks/#{user.id}/create",method: :post,remote: true)do%>
 
-     <textarea name="content"></textarea>
-    
-     <input type="submit" value="送信">
-
-    
-
+  <input type="text" name="content" class="comment_text_area" placeholder="メッセージを入力">
+  <input type="submit" value="&#xf3e5" class="comment_toukou_button fas fa-lg">
   <%end%>
+  </div>
+
 
 
 
 
 </div>
+
+
+
+
+
+

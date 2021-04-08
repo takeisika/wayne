@@ -1,8 +1,21 @@
 Rails.application.routes.draw do
- 
+
+
+  get "posts/search_form"=>"posts#search_form"
+  get "users/guest_form"=>"users#guest_form"
+  post "users/guest"=>"users#guest"
 
   
+  get 'hashtags/show'
+  get "follows/index"=>"follows#index"
+  post 'follows/:followed_id/create'=>"follows#create"
+  post 'follows/:followed_id/destroy'=>"follows#destroy"
   
+
+
+  get "hashtags/:id"=>"hashtags#show"
+
+
   post "talks/:your_id/create"=>"talks#create"
   get "talks/:your_id"=>"talks#show"
 
@@ -28,12 +41,15 @@ Rails.application.routes.draw do
   get "users/:id/edit"=>"users#edit"
   post "users/:id/update"=>"users#update"
 
+  
+
   get "posts/_form"=>"posts#_form"
   get "posts/index"=>"posts#index"
   post "posts/create"=>"posts#create"
   get "posts/:id/edit"=>"posts#edit"
   post "posts/:id/update"=>"posts#update"
   post "posts/:id/destroy"=>"posts#destroy"
+  post "posts/:id/destroy_at_comment"=>"posts#destroy_at_comment"
   get "posts/:id"=>"posts#show"
   get "posts/:id/comment"=>"posts#comment"
   post "posts/:id/come"=>"posts#come"

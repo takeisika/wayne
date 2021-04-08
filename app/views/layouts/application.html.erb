@@ -17,27 +17,51 @@
 
   <body>
 
-  <div class="new">
+
+
+  <div class="header">
    <%if @current_user%>
-   <%=link_to("みんなの投稿","/posts/index")%>
-   <%=link_to("投稿する","/posts/_form")%>
-   <%=link_to("ログアウト","/logout",{method: :post})%>
-   <%=link_to("アプリについて","/home/about")%>
-   <p><%=link_to(@current_user.name,"/users/#{@current_user.id}")%>さんがログイン中</p>
+   <div class="header_menu">
+   <div class="title_insp">insp</div>
+   <div class="menu_button">
+       <%=link_to("","/follows/index", class:"fas fa-home  fa-lg") %>
+       <%=link_to("","/posts/index", class:"fas fa-medal  fa-lg")%>
+       <%=link_to("","/posts/_form", class:"fas fa-edit  fa-lg")%>
+       <%=link_to("","/posts/search_form" ,class:"fas fa-search  fa-lg")%>
+       <%=link_to("","/users/#{@current_user.id}",class:"fas fa-user  fa-lg")%>
+       <span><%=link_to("👋","/logout",{method: :post})%></span>
+      </div>
+      </div>
    <%else%>
-   <%=link_to("TOP","/")%>
-   <%=link_to("新規登録","/users/new")%>
-   <%=link_to("ログイン","/users/login_form")%>
-   <%=link_to("このアプリについて","/home/about")%>
+   <div class="header_menu">
+   <div class="title_insp">insp</div>
+   <div class="menu_button_else">
+    <%=link_to("TOP","/")%>
+    <%=link_to("新規登録","/users/new")%>
+    <%=link_to("ログイン","/users/login_form")%>
+    <%=link_to("ゲスト利用(閲覧用)","/users/guest_form")%>
+    <span><%=link_to("アプリについて","/home/about")%></span>
+    </div>
+    </div>
    <%end%>
-   </div>
+
 
    <div class="flash">
    <%if flash[:notice]%>
-   <%=flash[:notice]%>
+     <p class="flash_letter">
+      <%=flash[:notice]%>
+     </p>
    <%end%>
    </div>
+
+  </div>
+  
+
+
+
+
    
     <%= yield %>
+
   </body>
 </html>

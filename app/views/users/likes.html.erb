@@ -5,7 +5,7 @@
         <%if @user.avator.attached?%>
           <object><%= link_to image_tag(@user.avator),@user.avator, :rel => "lightbox" %></object>
         <%else%>
-          <object><a href="/user_images/default.jpg" data-lightbox="group"><%=image_tag "/user_images/default.jpg"%></a></object>
+          <object><a href="/default.jpg" data-lightbox="group"><%=image_tag "/default.jpg"%></a></object>
         <%end%>
 
         <p class="user_show_name"><%=@user.name%></p>
@@ -26,11 +26,18 @@
 
 
         <%if @current_user.id!=@user.id%>
-          <%= link_to("/talks/#{@user.id}",method: :post) do %>
+          <%= link_to("/talks/#{@user.id}") do %>
           <i class="fas fa-envelope-square fa-2x"></i></span>
           <% end %>
         <%end%>
+
+        
+
         <%end%>
+
+        <div class="user_show_follow_button">
+         <%= render partial: 'follow' , locals: {user: @user}%>
+        </div>
 
 
 
@@ -53,11 +60,13 @@
 
 
 <%@likes=Like.where(user_id: params[:id])%>
+<%@likes = @likes.sort_by{|like| like.created_at}.reverse%>
 <%if @likes.count >= 1%>
   <div class="container">
         <%@likes.each do |like|%>
           <%@post=Post.find_by(id: like.post_id)%>
           <%if @post%>
+          <div class="index_<%=@post.id%>">
           <%= link_to("/posts/#{@post.id}/comment",class: "link")do %>
           
            <div class="index">
@@ -69,7 +78,7 @@
                  <%if @user.avator.attached?%>
                  <object><%= link_to image_tag(@user.avator),@user.avator, :rel => "lightbox" %></object>
                  <%else%>
-                 <object><a href="/user_images/default.jpg" data-lightbox="group"><%=image_tag "/user_images/default.jpg"%></a></object>
+                 <object><a href="/default.jpg" data-lightbox="group"><%=image_tag "/default.jpg"%></a></object>
                  <%end%>
                  </div>
                  <div class="index_likes_comments">
@@ -93,8 +102,18 @@
                     <%=@post.title%>
                   </div>
                   <div class="index_setu">
-                    <%=@post.content%>
-                  </div>
+                    <p><%=@post.content%></p>
+
+                    <% if @post.tag%>
+                    <%@hashtags=@post.tag.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)%>
+                      <%@hashtags.uniq.map do |hashtag|%>
+                         <%@tag = Hashtag.find_or_create_by(hashname: hashtag, post_id: @post.id)%>
+                         <%@tag.save%>
+                         <%@hash=Hashtag.find_by(hashname: hashtag)%>
+                         <object class="tag"><%=link_to(@hash.hashname,"/hashtags/#{@hash.id}")%></object>
+                      <%end%>
+                      <%end%>            
+                   </div>
 
 
                   <div class="index_right_file">
@@ -164,10 +183,19 @@
        </div>
 
                 </div>
+                <div class="comment_edit">
+                <%if @current_user%>
+                 <%if @current_user.id==@post.user_id%>
+                  <object><%=link_to("編集","/posts/#{@post.id}/edit")%></object>
+                  <object><%=link_to("削除","/posts/#{@post.id}/destroy",method: :post,remote: true)%></object>
+                 <%end%>
+                <%end%>
+               </div>                
            
            </div>
           <%end%>
           <%end%>
+          </div>
         <%end%>
     </div>
 

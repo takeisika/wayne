@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_action:check,{only:[:edit,:update,:destroy]}
 
+
   def edit
     @comment=Comment.find_by(id: params[:id])
   end
@@ -9,15 +10,16 @@ class CommentsController < ApplicationController
     @comment=Comment.find_by(id: params[:id])
     @comment.content=params[:commentupdate]
     if @comment.save
-      redirect_to("/posts/index")
+      redirect_to("/posts/#{@comment.comment_id}/comment")
     end
   end
 
   def destroy
     @comment=Comment.find_by(id: params[:id])
+    @post=Post.find_by(id: @comment.comment_id)
+    @comment_id=@comment.id
     @comment.destroy
-    flash[:notice]="削除完了"
-    redirect_to("/posts/index")
+    flash.now[:notice]="削除完了"
   end
 
 

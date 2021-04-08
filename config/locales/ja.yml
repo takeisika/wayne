@@ -210,3 +210,7 @@ ja:
       post:
         title: タイトル
         content: 説明
+    attributes:
+      user:
+        name: 名前
+        password: パスワード

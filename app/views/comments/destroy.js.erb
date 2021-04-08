@@ -1,0 +1,5 @@
+$('.index_comment_<%=@comment_id%>').html('');
+
+$('.flash').html('<%=flash[:notice]%>');
+
+$('#comments_buttons_<%= @post.id %>').html("<%= j(render partial: 'posts/comment', locals: {post: @post}) %>");
