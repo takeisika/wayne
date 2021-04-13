@@ -12,7 +12,7 @@
        <%end%>
        </div>
        <div class="index_likes_comments">
-         <object><div id="likes_buttons_<%= @post.id %>">
+         <object><div id="likes_buttons_<%= @post.id %> likes_buttons_id">
           <%= render partial: 'like', locals: { post: @post} %>
          </div></object>
          <div class="index_comments">
@@ -25,7 +25,7 @@
       
       <div class="index_right">
        <div class="index_header">
-        <%=link_to(@user.name,"/users/#{@user.id}")%>
+       <object class="index_user_name"><%=link_to(@user.name,"/users/#{@user.id}")%></object>
         <p><%= @post.updated_at.to_s(:datetime_jp) %></p>
         </div>
 

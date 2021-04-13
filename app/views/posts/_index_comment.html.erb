@@ -1,5 +1,20 @@
+
+
+
+<div class="comment_button_text_area">
+<%=form_tag("/posts/#{post.id}/come",method: :post,remote: true)do%>
+<input type="text" name="content" class="comment_text_area" placeholder="コメントしよう！">
+<input type="submit" value="&#xf3e5" class="comment_toukou_button fas fa-lg">
+<%end%>
+</div>
+
+
+
+
+
 <% @comments=Comment.where(comment_id: post.id)%>
-    <%if @comments%>
+    <%if @comments.count>=1%>
+    <div class="comment_index_show">
       <%@comments.each do |comment|%>
 <% @user=User.find_by(id: comment.user_id) %>
 <div class="index_comment_name_content_edit">
@@ -12,14 +27,25 @@
       <%=image_tag "/default.jpg"%>
      <%end%>
 
-    <span class="index_comment_name"><%=link_to(@user.name,"/users/#{@user.id}")%></span>
+     <div class="comment_name_content">
+        <span class="index_comment_name"><%=link_to(@user.name,"/users/#{@user.id}")%></span>
     
 
+        <div class="comment_content">
      <%if @current_user&&@current_user.id==comment.user_id%>
        <%=link_to(comment.content,"/comments/#{comment.id}/edit") %>
      <%else%>
      <span class="index_comment_content"><%=comment.content%></span>
      <%end%>
+     </div>
+
+     <p class="comment_time">
+       <%=comment.created_at.to_s(:datetime_jp)%>
+        <span id="comment_likes_buttons_<%= comment.id %>">
+          <%= render partial: 'comment_like', locals: { comment: comment} %>
+        </span>
+     </p>
+     </div>
 
      
    </div>
@@ -34,12 +60,7 @@
    <%end%>
 </div>
 <%end%>
-<%end%>
-
-
-<div class="comment_button_text_area">
-<%=form_tag("/posts/#{post.id}/come",method: :post,remote: true)do%>
-<input type="text" name="content" class="comment_text_area" placeholder="コメントしよう！">
-<input type="submit" value="&#xf3e5" class="comment_toukou_button fas fa-lg">
 </div>
+<%else%>
+<p class="comment_else">コメントはまだありません！</p>
 <%end%>

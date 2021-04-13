@@ -239,6 +239,7 @@ a{
 
 .user_signup{
 
+  background-color:white;
   margin-bottom:150px;
   margin-right:300px;
   margin-left:300px;
@@ -246,7 +247,7 @@ a{
   padding-bottom:50px;
   padding-right:70px;
   padding-left:70px;
-  box-shadow: 0 2px 6px #c1ced7;
+  border: solid 1px rgb(218, 217, 217);
 }
 
 .user_new_letter{
@@ -320,7 +321,8 @@ a{
   font-weight: normal;
   text-decoration: inherit;
   padding-left:3px;
-  border: solid 2px rgb(221, 221, 221);
+  border: solid 2px rgb(189, 189, 189);
+  border-radius: 3px;
 }
 
 
@@ -364,3 +366,9 @@ a{
 .form_error{
   color:rgb(175, 27, 59);
 }
+
+
+
+
+
+

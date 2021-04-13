@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
 
 
+
+  post "likecomments/:comment_id/create"=>"likecomments#create"
+  post "likecomments/:comment_id/destroy"=>"likecomments#destroy"
+
+
   get "posts/search_form"=>"posts#search_form"
   get "users/guest_form"=>"users#guest_form"
   post "users/guest"=>"users#guest"

@@ -51,7 +51,7 @@
       
       <div class="index_right">
        <div class="index_header">
-       <object><%=link_to(@user.name,"/users/#{@user.id}")%></object>
+       <object class="index_user_name"><%=link_to(@user.name,"/users/#{@user.id}")%></object>
         <p><%= post.updated_at.to_s(:datetime_jp) %></p>
        </div>
       

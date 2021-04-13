@@ -12,13 +12,19 @@
 
 .index_comment_name_content_edit{
     display: flex;
-    justify-content:space-between;
+    justify-content:space-between; 
+    margin-top:10px;
+    margin-bottom:20px;
+}
+
+.index_comment_edit_delete {
+    margin-right:25px;
 }
 
 .index_comment_edit_delete a{
     text-decoration: underline;
     color:grey;
-    font-size:12px;
+    font-size:10px;
 }
 
 .comment_edit_edit{
@@ -39,4 +45,48 @@
     padding-right:250px;
     padding-left:250px;
     padding-bottom:100px;
+}
+
+
+
+
+
+
+
+
+.comment_index_show{
+  border: solid 1px rgb(218, 217, 217);
+  margin-top:20px;
+  background-color: white;
+}
+
+
+
+.comment_name_content{
+
+}
+
+
+.comment_content{
+    font-size:13px;
+    color:rgb(70, 70, 70);
+    margin-top:5px;
+}
+
+
+
+.comment_time{
+    font-size:9px;
+    color:rgb(148, 148, 148);
+    margin:0;
+}
+
+
+
+
+.comment_else{
+    text-align:center;
+    color:rgb(88, 88, 88);
+    font-size:13px;
+    margin-top: 50px;
 }

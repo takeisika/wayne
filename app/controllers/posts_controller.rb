@@ -97,12 +97,14 @@ class PostsController < ApplicationController
 
 
   def search_form
-    if params[:hashsearch].present?&&params[:hashsearch]!=""""
+    if params[:hashsearch].present?&&params[:hashsearch]!=""""&&params[:hashsearch]!="#"
       @hashtags = Hashtag.where(['hashname LIKE ?', "%#{params[:hashsearch]}%"])
       if @hashtags.count<=1
         flash.now[:alert]="検索結果なし"
       end
     elsif params[:hashsearch]==""""
+      flash.now[:alert]="検索結果なし"
+    elsif params[:hashsearch]=="#"
       flash.now[:alert]="検索結果なし"
     end
   end
